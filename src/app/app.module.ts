@@ -13,10 +13,10 @@ import { SysconpModule } from './modules/sysconp/sysconp.module';
     LoginComponent
   ],
   imports: [
-    SysconpModule,
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     FormsModule,
+    SysconpModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
