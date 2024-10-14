@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AgendamentoService } from '../../service/agendamento.service';
 
 @Component({
   selector: 'app-agendamento',
@@ -6,13 +7,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./agendamento.component.scss']
 })
 export class AgendamentoComponent {
-  public appointments = [
-    { client: 'Zenilda', project: 'Zenilda', date: '2024-10-14', time: '15:00', status: 'Pendente' },
-  ];
-  
+  public appointments: any[] = [];
   isModalOpen = false;
   selectedAppointment: any = null; 
-  index= 0; 
+  index = 0; 
+
+  constructor(private agendamentoService: AgendamentoService) {}
+
+  ngOnInit() {
+    this.getAppointments(); // Chama o método ao inicializar o componente
+  }
+
+  getAppointments() {
+    this.agendamentoService.getAppointments().subscribe(
+      (data) => {
+        this.appointments = data.map(appointment => ({
+          client: appointment.name, 
+          project: appointment.name, 
+          date: appointment.visitDate, 
+          time: appointment.visitTime, 
+          status: appointment.status ? 'Confirmado' : 'Pendente' 
+        }));
+      },
+      (error) => {
+        console.error('Erro ao buscar agendamentos:', error);
+      }
+    );
+  }
 
   openModal() {
     this.isModalOpen = true;
@@ -22,13 +43,14 @@ export class AgendamentoComponent {
     this.isModalOpen = false;
   }
 
-  addNewAppointment(appointment:any) {
+  addNewAppointment(appointment: any) {
     this.appointments.push(appointment); 
     this.closeModal();
   }
-  editAppointment(appointment: any, index:number) {
+
+  editAppointment(appointment: any, index: number) {
     this.selectedAppointment = appointment; 
-    this.index= index;
+    this.index = index;
     this.isModalOpen = true; 
   }
 

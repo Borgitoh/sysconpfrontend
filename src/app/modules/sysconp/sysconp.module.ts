@@ -10,6 +10,7 @@ import { AgendamentoComponent } from './components/agendamento/agendamento.compo
 import { AgendamentoModalComponent } from './components/modal/agendamento-modal/agendamento-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from './components/spinner/spinner.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
     FormsModule,
     LucideAngularModule.pick({ Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Ellipsis}), 
     SysconpRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
