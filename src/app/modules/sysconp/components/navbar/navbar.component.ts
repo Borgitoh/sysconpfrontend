@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import navigationLinks from '../../enums/navigationLinks';
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +6,7 @@ import navigationLinks from '../../enums/navigationLinks';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+  bgImage = 'assets/img/fundo.png';
   sidebarOpen = false;
   showNotifications = false;
   showUserMenu = false;

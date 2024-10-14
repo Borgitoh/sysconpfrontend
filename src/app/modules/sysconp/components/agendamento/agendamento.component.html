@@ -5,19 +5,18 @@
 
   <div class="grid grid-cols-2 gap-3 justify-between items-center bg-white p-5 rounded-b-lg">
     <div class="text-sm font-bold flex gap-3 text-black">
-      <input type="text" placeholder="Filtrar" class="font-normal dark:bg-gray-900 dark:border-none dark:text-white p-2 rounded-md" />
-      <input type="date" class="font-normal dark:bg-gray-900 dark:border-none dark:text-white p-2 rounded-md" />
+      <input type="text" placeholder="Filtrar" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm" />
+      <input type="date" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm" />
     </div>
     <div class="grid grid-cols-2 gap-3">
       <div class="flex justify-items-end w-[100%]">
-        <button class="text-black bg-white dark:bg-gray-900 dark:text-white hover:bg-gray-300 p-2 flex items-center gap-2 rounded-md">
+        <button class="text-black bg-white p-2 flex items-center gap-2 rounded-md">
           <lucide-icon name="download" class="w-5 h-5"></lucide-icon>
           PDF
         </button>
       </div>
       <div>
-        <!-- Implementar um modal para o novo agendamento -->
-        <button class="bg-blue-500 text-white p-2 rounded-md">Novo Agendamento</button>
+        <button (click)="openModal()" class="bg-blue-500 text-white p-2 rounded-md">Novo Agendamento</button>
       </div>
     </div>
   </div>
@@ -34,7 +33,7 @@
           <th class="p-4 text-right">Ações</th>
         </tr>
       </thead>
-      <tbody class="bg-gray-50 dark:bg-gray-800 dark:text-white">
+      <tbody class="bg-white-50 dark:bg-gray-800 dark:text-white">
         <tr *ngFor="let appointment of appointments; let i = index" class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="p-4">{{ appointment.client }}</td>
           <td class="p-4">{{ appointment.project }}</td>
@@ -62,4 +61,6 @@
       </tbody>
     </table>
   </div>
+
+  <app-agendamento-modal (closeModal)="closeModal()" (addNewAppointment)="addNewAppointment($event)"  *ngIf="isModalOpen"></app-agendamento-modal>
 </section>

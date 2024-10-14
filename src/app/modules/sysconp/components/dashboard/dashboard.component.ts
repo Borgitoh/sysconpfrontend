@@ -6,7 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  bgImage = 'assets/img/fundo.png'; // Atualize o caminho da imagem
   recentSales = [
     {
       name: 'Olivia Martin',

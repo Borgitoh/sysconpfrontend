@@ -7,17 +7,22 @@ import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { Briefcase, CalendarDays, CheckCheck, CircleSlash, Clock3, Download, Ellipsis, File, FileIcon, FileText, Home, LucideAngularModule, Menu, Pencil, ShoppingCart, UserCheck, Users } from 'lucide-angular';
 import { AgendamentoComponent } from './components/agendamento/agendamento.component';
+import { AgendamentoModalComponent } from './components/modal/agendamento-modal/agendamento-modal.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     HomeComponent,
     NavbarComponent,
     DashboardComponent,
-    AgendamentoComponent
+    AgendamentoComponent,
+    AgendamentoModalComponent
   ],
   imports: [
     LucideAngularModule.pick({ Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Ellipsis}), 
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     SysconpRoutingModule,
     RouterModule
   ],
