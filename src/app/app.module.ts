@@ -7,6 +7,8 @@ import { LoginComponent } from './page/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { SysconpModule } from './modules/sysconp/sysconp.module';
 import { LucideAngularModule, File, Home, Menu, UserCheck,FileIcon  } from 'lucide-angular';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoadingInterceptor } from './modules/sysconp/loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,13 @@ import { LucideAngularModule, File, Home, Menu, UserCheck,FileIcon  } from 'luci
     FormsModule,
     SysconpModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

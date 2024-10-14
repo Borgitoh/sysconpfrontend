@@ -48,7 +48,7 @@
               <button class="w-full px-3 py-2 text-sm flex items-center gap-2 hover:bg-gray-200">
                 <lucide-icon name="check-check" class="w-5 h-5"></lucide-icon> Confirmar
               </button>
-              <button class="w-full px-3 py-2 text-sm flex items-center gap-2 hover:bg-gray-200">
+              <button (click)="editAppointment(appointment, index)"  class="w-full px-3 py-2 text-sm flex items-center gap-2 hover:bg-gray-200">
                 <lucide-icon name="pencil" class="w-5 h-5"></lucide-icon> Editar
               </button>
               <hr class="mt-2 mb-2">
@@ -62,5 +62,5 @@
     </table>
   </div>
 
-  <app-agendamento-modal (closeModal)="closeModal()" (addNewAppointment)="addNewAppointment($event)"  *ngIf="isModalOpen"></app-agendamento-modal>
+  <app-agendamento-modal (closeModal)="closeModal()" (addNewAppointment)="addNewAppointment($event)" [selectedAppointment]="selectedAppointment" *ngIf="isModalOpen"></app-agendamento-modal>
 </section>

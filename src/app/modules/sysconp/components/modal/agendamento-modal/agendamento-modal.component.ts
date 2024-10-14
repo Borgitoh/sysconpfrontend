@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -6,17 +6,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './agendamento-modal.component.html',
   styleUrls: ['./agendamento-modal.component.scss'],
 })
-export class AgendamentoModalComponent {
+export class AgendamentoModalComponent implements OnInit {
   @Output() closeModal = new EventEmitter<void>();
-  @Output() addNewAppointment = new EventEmitter<any>()
+  @Output() addNewAppointment = new EventEmitter<any>();
+  @Input() selectedAppointment: any;
+
   appointmentForm: FormGroup;
-  appointment: any = {  // Adicione esta linha
-    client: '',
-    project: '',
-    date: '',
-    time: '',
-    status: 'Pending',
-  };
 
   constructor(private fb: FormBuilder) {
     this.appointmentForm = this.fb.group({
@@ -28,11 +23,18 @@ export class AgendamentoModalComponent {
     });
   }
 
+  ngOnInit() {
+    if (this.selectedAppointment) {
+      this.appointmentForm.setValue(this.selectedAppointment);
+      this.appointmentForm.patchValue(this.selectedAppointment);
+    }
+  }
+
   addAppointment() {
     if (this.appointmentForm.valid) {
       const newAppointment = this.appointmentForm.value;
       this.addNewAppointment.emit(newAppointment);
-      console.log('Agendamento adicionado:', newAppointment);
+      console.log('Agendamento adicionado ou editado:', newAppointment);
       // Emitir evento para fechar o modal
       this.closeModal.emit();
     }

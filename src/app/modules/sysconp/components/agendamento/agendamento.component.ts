@@ -10,7 +10,9 @@ export class AgendamentoComponent {
     { client: 'Zenilda', project: 'Zenilda', date: '2024-10-14', time: '15:00', status: 'Pendente' },
   ];
   
-  isModalOpen = false; 
+  isModalOpen = false;
+  selectedAppointment: any = null; 
+  index= 0; 
 
   openModal() {
     this.isModalOpen = true;
@@ -24,6 +26,12 @@ export class AgendamentoComponent {
     this.appointments.push(appointment); 
     this.closeModal();
   }
+  editAppointment(appointment: any, index:number) {
+    this.selectedAppointment = appointment; 
+    this.index= index;
+    this.isModalOpen = true; 
+  }
+
   toggleDropdown(index: number) {
     const dropdown = document.getElementById(`dropdown-${index}`);
     if (dropdown) dropdown.classList.toggle('hidden');

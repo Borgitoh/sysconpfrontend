@@ -9,6 +9,7 @@ import { Briefcase, CalendarDays, CheckCheck, CircleSlash, Clock3, Download, Ell
 import { AgendamentoComponent } from './components/agendamento/agendamento.component';
 import { AgendamentoModalComponent } from './components/modal/agendamento-modal/agendamento-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SpinnerComponent } from './components/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +17,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     DashboardComponent,
     AgendamentoComponent,
-    AgendamentoModalComponent
+    AgendamentoModalComponent,
+    SpinnerComponent
   ],
   imports: [
-    LucideAngularModule.pick({ Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Ellipsis}), 
     CommonModule,
-    FormsModule,
     ReactiveFormsModule,
+    FormsModule,
+    LucideAngularModule.pick({ Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Ellipsis}), 
     SysconpRoutingModule,
     RouterModule
   ],
