@@ -23,7 +23,8 @@ export class AgendamentoComponent {
       (data) => {
         this.appointments = data.map(appointment => ({
           client: appointment.name, 
-          project: appointment.name, 
+          project: appointment.project.name, 
+          telefone: appointment.phone,
           date: appointment.visitDate, 
           time: appointment.visitTime, 
           status: appointment.status ? 'Confirmado' : 'Pendente' 

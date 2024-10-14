@@ -18,10 +18,13 @@ export class AuthService {
   login(login:any): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'login',login).pipe(
       tap(user => {
+        console.log(user);
+        
         this.accessToken = user.backendTokens.accessToken;
         this.refreshToken = user.backendTokens.refreshToken;
         this.userSubject.next(true);
         localStorage.setItem('accessToken', this.accessToken);
+        localStorage.setItem('iduser', user.user.id);
         localStorage.setItem('refreshToken', this.refreshToken);
         
       })
@@ -51,6 +54,7 @@ export class AuthService {
     this.refreshToken = null;
     this.userSubject.next(false);
     localStorage.removeItem('accessToken');
+    localStorage.removeItem('iduser');
     localStorage.removeItem('refreshToken');
   }
 }

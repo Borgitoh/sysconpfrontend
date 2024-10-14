@@ -13,11 +13,18 @@ export class AgendamentoService {
   getAppointments(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl+'/all');
   }
+  
 
   createAppointment(appointment: any): Observable<any> {
-    console.log(appointment);
-    
-    const { name, email,bi, phone, dateVisit, visitTime} = appointment;
-    return this.http.post<any>(this.apiUrl+'/create:33',  { name, email,bi, phone, dateVisit, visitTime});
+    const transformedAppointment = {
+      name: appointment.client,       
+      phone: String (appointment.numero),      
+      visitDate: appointment.date,    
+      visitTime: appointment.time,    
+      projectId: appointment.project
+    };
+
+    return this.http.post<any>(`${this.apiUrl}/create/${localStorage.getItem('iduser')}`, transformedAppointment);
   }
+  
 }

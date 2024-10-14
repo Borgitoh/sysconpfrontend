@@ -27,6 +27,7 @@
         <tr class="text-white bg-blue-800">
           <th class="p-4">Cliente</th>
           <th class="p-4">Projeto</th>
+          <th class="p-4">Telefone</th>
           <th class="p-4">Data de Marcação</th>
           <th class="p-4">Hora de Marcação</th>
           <th class="p-4">Estado</th>
@@ -35,11 +36,12 @@
       </thead>
       <tbody class="bg-white-50 dark:bg-gray-800 dark:text-white">
         <tr *ngFor="let appointment of appointments; let i = index" class="hover:bg-gray-100 dark:hover:bg-gray-700">
-          <td class="p-4">{{ appointment.client }}</td>
-          <td class="p-4">{{ appointment.project }}</td>
-          <td class="p-4">{{ appointment.date }}</td>
-          <td class="p-4">{{ appointment.time }}</td>
-          <td class="p-4">{{ appointment.status }}</td>
+          <td class="text-center p-4">{{ appointment.client }}</td>
+          <td class="text-center p-4">{{ appointment.project }}</td>
+          <td class="text-center p-4">{{ appointment.telefone }}</td>
+          <td class="text-center p-4">{{ appointment.date }}</td>
+          <td class="text-center p-4">{{ appointment.time }}</td>
+          <td class="text-center p-4">{{ appointment.status }}</td>
           <td class="p-4 text-right">
             <button (click)="toggleDropdown(i)" class="p-2">
               <lucide-icon name="ellipsis" class="w-5 h-5"></lucide-icon>
