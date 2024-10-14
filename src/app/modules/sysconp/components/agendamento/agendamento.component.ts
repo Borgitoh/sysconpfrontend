@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AgendamentoService } from '../../service/agendamento.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-agendamento',
@@ -12,7 +13,8 @@ export class AgendamentoComponent {
   selectedAppointment: any = null; 
   index = 0; 
 
-  constructor(private agendamentoService: AgendamentoService) {}
+  constructor(private agendamentoService: AgendamentoService,
+              private datePipe: DatePipe) {}
 
   ngOnInit() {
     this.getAppointments();
@@ -48,7 +50,6 @@ export class AgendamentoComponent {
     this.agendamentoService.createAppointment(appointment).subscribe(
       (response) => {
         this.getAppointments();
-        // this.appointments.push(response);
         this.closeModal();
       },
       (error) => {
@@ -61,6 +62,10 @@ export class AgendamentoComponent {
     this.selectedAppointment = appointment; 
     this.index = index;
     this.isModalOpen = true; 
+  }
+
+  formatDate(date: string): string | null {
+    return this.datePipe.transform(date, 'dd MMMM yyyy'); 
   }
 
   toggleDropdown(index: number) {
