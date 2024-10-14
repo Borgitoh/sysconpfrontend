@@ -14,7 +14,7 @@ import { LucideAngularModule, File, Home, Menu, UserCheck,FileIcon  } from 'luci
     LoginComponent
   ],
   imports: [
-    LucideAngularModule.pick({File, Home, Menu, UserCheck}),
+    LucideAngularModule.pick({File, Home, Menu, UserCheck}), 
     AppRoutingModule,
     BrowserModule,
     FormsModule,
