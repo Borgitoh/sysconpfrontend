@@ -7,7 +7,7 @@ import { catchError, tap } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class AuthService {
-  private apiUrl = 'https://api-sysconp.onrender.com/auth/';
+  private apiUrl = 'https://sysconp-api-1.onrender.com/auth/';
   private accessToken: string | any = null;
   private refreshToken: string | any = null;
   private userSubject: BehaviorSubject<any> = new BehaviorSubject(null);

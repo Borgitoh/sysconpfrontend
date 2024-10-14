@@ -1,0 +1,59 @@
+<section class="h-full lg:p-10 md:p-5">
+  <div class="container mx-auto mb-4">
+    <div class="flex justify-between items-center mb-4">
+      <input
+        type="text"
+        placeholder="Pesquisar usuários..."
+        [(ngModel)]="searchTerm"
+        (ngModelChange)="filterUsers()"
+        class="border rounded-full p-2 pl-4 w-1/2 bg-white dark:text-white dark:bg-dark-primary dark:border-none focus:ring-1 ring-offset-1 ring-blue-800"
+      />
+      <button
+        (click)="onCreateUser()"
+        class="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2 dark:hover:bg-dark-primary"
+      >
+        <lucide-icon name="plus" class="w-5 h-5"></lucide-icon>
+        Criar novo usuário
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div *ngFor="let user of filteredUsers; let i = index" class="w-full">
+      <div class="bg-white dark:bg-dark-primary dark:shadow-lg shadow-sm w-full rounded-lg p-6 text-center relative">
+        <div class="flex justify-center">
+          <div
+            [ngStyle]="{ 'background-image': 'url(' + user.image + ')' }"
+            class="w-24 h-24 rounded-full bg-cover flex justify-center items-center"
+          ></div>
+        </div>
+        <div>
+          <h2 class="mt-4 text-xl font-semibold text-gray-800 dark:text-white">{{ user.name }}</h2>
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ user.position }}</p>
+        </div>
+        <div class="absolute top-2 right-2">
+          <!-- Dropdown Menu -->
+          <div class="relative">
+            <button class="p-2" (click)="toggleDropdown(i)">
+              <lucide-icon name="menu" class="mr-2 h-4 w-4 dark:text-white"></lucide-icon>
+            </button>
+            <div *ngIf="dropdownOpen === i" class="absolute right-0  w-56 bg-white dark:bg-gray-800 shadow-lg rounded-lg mt-2">
+              <button class="w-full px-3 py-2 text-sm flex items-center hover:bg-gray-200">
+                <lucide-icon name="edit" class="mr-2 h-4 w-4"></lucide-icon>
+                Editar
+              </button>
+              <button class="w-full px-3 py-2 text-sm flex items-center hover:bg-gray-200">
+                <lucide-icon name="lock" class="mr-2 h-4 w-4"></lucide-icon>
+                Alterar Senha
+              </button>
+              <button class="w-full px-3 py-2 text-sm flex items-center text-red-600 hover:bg-red-200">
+                <lucide-icon name="trash-2" class="mr-2 h-4 w-4"></lucide-icon>
+                Excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

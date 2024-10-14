@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AgendamentoService {
-  private apiUrl = 'https://api-sysconp.onrender.com/appointments'; 
+  private apiUrl = 'https://sysconp-api-1.onrender.com/appointments'; 
 
   constructor(private http: HttpClient) {}
 
