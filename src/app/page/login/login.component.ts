@@ -13,10 +13,9 @@ export class LoginComponent  {
   flLogin = false;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
-    // Cria o FormGroup usando FormBuilder
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],  // Validação para o email
-      password: ['', [Validators.required]],                  // Validação para a senha
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
     });
   }
 

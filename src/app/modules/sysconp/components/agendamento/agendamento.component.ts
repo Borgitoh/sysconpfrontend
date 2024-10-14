@@ -15,7 +15,7 @@ export class AgendamentoComponent {
   constructor(private agendamentoService: AgendamentoService) {}
 
   ngOnInit() {
-    this.getAppointments(); // Chama o método ao inicializar o componente
+    this.getAppointments();
   }
 
   getAppointments() {
@@ -44,8 +44,16 @@ export class AgendamentoComponent {
   }
 
   addNewAppointment(appointment: any) {
-    this.appointments.push(appointment); 
-    this.closeModal();
+    this.agendamentoService.createAppointment(appointment).subscribe(
+      (response) => {
+        this.getAppointments();
+        // this.appointments.push(response);
+        this.closeModal();
+      },
+      (error) => {
+        console.error('Erro ao criar o agendamento:', error);
+      }
+    );
   }
 
   editAppointment(appointment: any, index: number) {
