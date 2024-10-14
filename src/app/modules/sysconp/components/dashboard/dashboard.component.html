@@ -1,14 +1,3 @@
-<!-- dashboard.component.html -->
-<div
-  class="h-40 w-full bg-cover bg-center rounded-t-lg flex justify-start items-center"
-  [ngStyle]="{'background-image': 'url(' + bgImage + ')'}"
->
-  <div class="p-10 h-auto" style="font-family: 'CustomFont'">
-    <div class="text-white text-2xl font-black font-sans">Bem-vindo ao Sysconp</div>
-    <div class="text-white font-medium font-sans text-sm mt-1">Administrador</div>
-  </div>
-</div>
-
 <div class="space-y-6 mt-6">
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
     <ng-container *ngFor="let card of [{title: 'Receita Total', value: '45.231,89 kz', change: '+20,1% em relação ao mês passado'}, {title: 'Assinaturas', value: '+2.350', change: '+180,1% em relação ao mês passado'}, {title: 'Vendas', value: '+12.234', change: '+19% em relação ao mês passado'}, {title: 'Ativos Agora', value: '+573', change: '+201 desde a última hora'}]">
@@ -40,10 +29,6 @@
     <div class="col-span-4 dark:border-none dark:bg-dark-primary border rounded-lg p-4">
       <div class="font-medium">Visão Geral</div>
       <div class="pl-2">
-        <!-- Aqui você pode adicionar o gráfico -->
-        <!-- <ResponsiveContainer width="100%" height={350}>
-          <MyBarChart />
-        </ResponsiveContainer> -->
       </div>
     </div>
     <div class="col-span-3 dark:border-none dark:bg-dark-primary border rounded-lg p-4">

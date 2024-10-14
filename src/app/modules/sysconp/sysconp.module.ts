@@ -5,18 +5,18 @@ import { SysconpRoutingModule } from './sysconp-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { Briefcase, CalendarDays, Clock3, File, FileIcon, FileText, Home, LucideAngularModule, Menu, ShoppingCart, UserCheck, Users } from 'lucide-angular';
-
-
+import { Briefcase, CalendarDays, CheckCheck, CircleSlash, Clock3, Download, Ellipsis, File, FileIcon, FileText, Home, LucideAngularModule, Menu, Pencil, ShoppingCart, UserCheck, Users } from 'lucide-angular';
+import { AgendamentoComponent } from './components/agendamento/agendamento.component';
 
 @NgModule({
   declarations: [
     HomeComponent,
     NavbarComponent,
-    DashboardComponent
+    DashboardComponent,
+    AgendamentoComponent
   ],
   imports: [
-    LucideAngularModule.pick({ Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3 }), 
+    LucideAngularModule.pick({ Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Ellipsis}), 
     CommonModule,
     SysconpRoutingModule,
     RouterModule
