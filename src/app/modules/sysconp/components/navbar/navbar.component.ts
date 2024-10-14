@@ -8,9 +8,11 @@ import navigationLinks from '../../enums/navigationLinks';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  isMenuOpen = false;
+  sidebarOpen = false;
+  showNotifications = false;
+  showUserMenu = false;
 
-  toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+  toggleSidebar() {
+    this.sidebarOpen = !this.sidebarOpen;
   }
 }
