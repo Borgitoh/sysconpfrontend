@@ -10,12 +10,14 @@ import { AgendamentoComponent } from './components/agendamento/agendamento.compo
 import { AgendamentoModalComponent } from './components/modal/agendamento-modal/agendamento-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SpinnerComponent } from './components/spinner/spinner.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import localePt from '@angular/common/locales/pt';
 import { UsuarioModalComponent } from './components/modal/usuario-modal/usuario-modal.component';
 import { ProjetosComponent } from './components/projetos/projetos.component';
 import { ProjetoModalComponent } from './components/modal/projeto-modal/projeto-modal.component';
+import { TokenInterceptor } from './token.interceptor';
+import { LoadingInterceptor } from './loading.interceptor';
 registerLocaleData(localePt);
 @NgModule({
   declarations: [
@@ -39,7 +41,12 @@ registerLocaleData(localePt);
     RouterModule,
     HttpClientModule,
   ],
-  providers: [ DatePipe, { provide: LOCALE_ID, useValue: 'pt' }],
+  exports: [SpinnerComponent],
+  providers: [ DatePipe, { provide: LOCALE_ID, useValue: 'pt' }, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
+    multi: true
+  }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SysconpModule {

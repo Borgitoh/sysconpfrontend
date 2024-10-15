@@ -10,7 +10,6 @@ import { LucideAngularModule, File, Home, Menu, UserCheck,FileIcon  } from 'luci
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoadingInterceptor } from './modules/sysconp/loading.interceptor';
 import { TokenInterceptor } from './modules/sysconp/token.interceptor';
-import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -29,9 +28,9 @@ import { DatePipe } from '@angular/common';
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useClass: TokenInterceptor,
+      useClass: LoadingInterceptor,
       multi: true
-    }, DatePipe],
+    }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
