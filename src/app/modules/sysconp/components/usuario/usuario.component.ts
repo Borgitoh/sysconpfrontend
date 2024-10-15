@@ -53,7 +53,7 @@ export class UsuarioComponent {
     this.usuarioService.addUsuario(usuario).subscribe(
       (data) => {
         console.log(data);
-
+        this.getUsuario();
       },
       (error) => {
         console.error('Erro ao usaurio:', error);

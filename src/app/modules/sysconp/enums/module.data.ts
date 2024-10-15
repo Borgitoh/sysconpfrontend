@@ -36,3 +36,32 @@ export const UsersData: any[] = [
       email: 'laura.gomes@example.com',
   },
 ];
+
+
+export const Projects: any[] = [
+  {
+      image: 'https://example.com/imagem-projeto1.jpg', 
+      name: 'Projeto Alpha',
+      description: 'Desenvolvimento de uma aplicação inovadora para gestão de tarefas.',
+  },
+  {
+      image: 'https://example.com/imagem-projeto2.jpg', 
+      name: 'Projeto Beta',
+      description: 'Pesquisa e desenvolvimento de novas tecnologias de energia renovável.',
+  },
+  {
+      image: 'https://example.com/imagem-projeto3.jpg', 
+      name: 'Projeto Gamma',
+      description: 'Design de produtos voltados para a experiência do usuário.',
+  },
+  {
+      image: 'https://example.com/imagem-projeto4.jpg', 
+      name: 'Projeto Delta',
+      description: 'Análise de dados para insights de mercado e desempenho.',
+  },
+  {
+      image: 'https://example.com/imagem-projeto5.jpg',
+      name: 'Projeto Epsilon',
+      description: 'Estratégia de marketing digital para aumentar a visibilidade da marca.',
+  },
+];

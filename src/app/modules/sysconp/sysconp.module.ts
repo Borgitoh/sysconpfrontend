@@ -14,6 +14,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import localePt from '@angular/common/locales/pt';
 import { UsuarioModalComponent } from './components/modal/usuario-modal/usuario-modal.component';
+import { ProjetosComponent } from './components/projetos/projetos.component';
+import { ProjetoModalComponent } from './components/modal/projeto-modal/projeto-modal.component';
 registerLocaleData(localePt);
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ registerLocaleData(localePt);
     AgendamentoModalComponent,
     SpinnerComponent,
     UsuarioComponent,
-    UsuarioModalComponent
+    UsuarioModalComponent,
+    ProjetosComponent,
+    ProjetoModalComponent
   ],
   imports: [
     CommonModule,

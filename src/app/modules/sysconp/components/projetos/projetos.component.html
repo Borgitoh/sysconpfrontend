@@ -1,0 +1,56 @@
+<section class="h-full lg:p-10 md:p-5">
+  <div class="container mx-auto mb-4">
+    <div class="flex justify-between items-center mb-4">
+      <input type="text" [formControl]="searchControl" placeholder="Pesquisar projetos..."
+        class="border rounded-full p-2 pl-4 w-1/2 bg-white dark:text-white dark:bg-dark-primary dark:border-none dark:focus:border-none dark:shadow-sm focus:!ring-1 ring-offset-1 !ring-blue-800" />
+      <button (click)="openCreateModal()"
+        class="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2 dark:hover:bg-dark-primary">
+        <lucide-icon name="plus" class="w-5 h-5"></lucide-icon>
+        Criar novo projeto
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div *ngFor="let project of filteredProjects; let i = index" class="w-full">
+      <div class="relative w-full h-40 rounded-t-lg bg-center bg-slate-200"
+        [ngStyle]="{ 'background-image': 'url(' + project.image + ')' }">
+        <div class="absolute top-2 right-2">
+          <div class="relative">
+            <button
+              (click)="toggleDropdown(i)"
+              class="cursor-pointer m-1 rounded-full bg-white dark:bg-dark-primary shadow-lg p-2 opacity-40"
+            >
+              <lucide-icon name="ellipsis" class="h-4 w-4 text-black dark:text-white"></lucide-icon>
+            </button>
+        
+            <div *ngIf="dropdownOpenIndex === i" class="dropdown-content w-56 absolute right-0 bg-white dark:bg-dark-primary shadow-lg rounded mt-1 z-10">
+              <div class="dropdown-label p-2 font-semibold">Ações</div>
+              <div class="dropdown-separator"></div>
+              <div
+                (click)="onEdit()"
+                class="flex items-center cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+              >
+                <lucide-icon name="edit" class="mr-2 h-4 w-4"></lucide-icon>
+                Editar
+              </div>
+              <div
+                (click)="onDelete()"
+                class="flex hover:bg-red-100 items-center text-red-600 cursor-pointer p-2"
+              >
+                <lucide-icon name="trash-2" class="mr-2 h-4 w-4"></lucide-icon>
+                Excluir
+              </div>
+            </div>
+          </div>
+        </div>        
+      </div>
+      <div class="bg-white dark:bg-dark-primary dark:shadow-lg shadow-sm w-full rounded-lg p-6 text-center relative">
+        <h2 class="mt-1 text-sm font-semibold text-gray-800 dark:text-white">{{ project.name }}</h2>
+        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ project.description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <app-projecto-modal *ngIf="isCreateModalOpen" (close)="closeCreateModal()"></app-projecto-modal>
+</section>

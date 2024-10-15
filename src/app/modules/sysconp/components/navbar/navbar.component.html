@@ -1,10 +1,12 @@
 <nav class="bg-blue-800 p-4 flex justify-between items-center top-0 left-0 w-full z-50 shadow-lg">
   <div class="text-white font-bold text-lg flex items-center">
     <button class="text-white focus:outline-none mr-4" (click)="toggleSidebar()">
-      <svg *ngIf="!sidebarOpen" class="block h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+      <svg *ngIf="!sidebarOpen" class="block h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2"
+        stroke="currentColor" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
-      <svg *ngIf="sidebarOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg *ngIf="sidebarOpen" xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24"
+        stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
       </svg>
     </button>
@@ -14,8 +16,10 @@
   <div class="flex items-center space-x-6">
     <div class="relative" (mouseenter)="showNotifications = true" (mouseleave)="showNotifications = false">
       <button class="text-white focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m0 0v1a3 3 0 106 0v-1m-6 0h6" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m0 0v1a3 3 0 106 0v-1m-6 0h6" />
         </svg>
         <span class="absolute top-0 right-0 block h-3 w-3 bg-red-600 rounded-full border border-white"></span>
       </button>
@@ -45,8 +49,10 @@
 
     <div class="relative" (mouseenter)="showUserMenu = true" (mouseleave)="showUserMenu = false">
       <button class="text-white focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 18.364A9 9 0 1118.364 5.121 9 9 0 015.121 18.364zM15 11a3 3 0 11-6 0 3 3 0 016 0zm-6 6a6 6 0 1112 0H9z" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M5.121 18.364A9 9 0 1118.364 5.121 9 9 0 015.121 18.364zM15 11a3 3 0 11-6 0 3 3 0 016 0zm-6 6a6 6 0 1112 0H9z" />
         </svg>
       </button>
       <div *ngIf="showUserMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-40">
@@ -62,15 +68,12 @@
 </nav>
 
 <!-- Overlay -->
-<div
-  [ngClass]="{'block': sidebarOpen, 'hidden': !sidebarOpen}"
-  class="fixed inset-0 bg-gray-800 bg-opacity-50 z-40"
+<div [ngClass]="{'block': sidebarOpen, 'hidden': !sidebarOpen}" class="fixed inset-0 bg-gray-800 bg-opacity-50 z-40"
   (click)="toggleSidebar()">
 </div>
 
 <!-- Sidebar -->
-<div
-  [ngClass]="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}"
+<div [ngClass]="{'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen}"
   class="fixed top-0 left-0 w-64 bg-white h-full shadow-lg transform transition-transform duration-300 ease-in-out z-50">
 
   <div class="p-4 bg-blue-800 text-white font-bold flex justify-between items-center">
@@ -83,41 +86,40 @@
   </div>
 
   <!-- Links de Navegação -->
-<ul class="mt-4">
-  <li class="p-4 hover:bg-gray-200 flex items-center">
-    <lucide-icon name="home" class="mr-2"></lucide-icon> 
-    <a routerLink="/sysconp" class="block text-gray-900">Dashboard</a>
-  </li>
-  <li class="p-4 hover:bg-gray-200 flex items-center">
-    <lucide-icon name="clock-3" class="mr-2"></lucide-icon> 
-    <a routerLink="/sysconp/agendamentos" class="block text-gray-900">Agendamentos</a>
-  </li>
-  <li class="p-4 hover:bg-gray-200 flex items-center">
-    <lucide-icon name="briefcase" class="mr-2"></lucide-icon> 
-    <a routerLink="/projects" class="block text-gray-900">Projectos</a>
-  </li>
-  <li class="p-4 hover:bg-gray-200 flex items-center">
-    <lucide-icon name="home" class="mr-2"></lucide-icon> 
-    <a routerLink="/properties" class="block text-gray-900">Imóvel</a>
-  </li>
-  <li class="p-4 hover:bg-gray-200 flex items-center">
-    <lucide-icon name="file-text" class="mr-2"></lucide-icon> 
-    <a routerLink="/reports" class="block text-gray-900">Relatórios</a>
-  </li>
-  <li class="p-4 hover:bg-gray-200 flex items-center">
-    <lucide-icon name="users" class="mr-2"></lucide-icon> 
-    <a routerLink="/sysconp/usuario" class="block text-gray-900">Gestão de usuário</a>
-  </li>
-  <li class="p-4 hover:bg-gray-200 flex items-center">
-    <lucide-icon name="shopping-cart" class="mr-2"></lucide-icon> 
-    <a routerLink="/sales" class="block text-gray-900">Vendas</a>
-  </li>
-</ul>
+  <ul class="mt-4">
+    <li class="p-4 hover:bg-gray-200 flex items-center">
+      <lucide-icon name="home" class="mr-2"></lucide-icon>
+      <a routerLink="/sysconp" class="block text-gray-900">Dashboard</a>
+    </li>
+    <li class="p-4 hover:bg-gray-200 flex items-center">
+      <lucide-icon name="clock-3" class="mr-2"></lucide-icon>
+      <a routerLink="/sysconp/agendamentos" class="block text-gray-900">Agendamentos</a>
+    </li>
+    <li class="p-4 hover:bg-gray-200 flex items-center">
+      <lucide-icon name="briefcase" class="mr-2"></lucide-icon>
+      <a routerLink="/sysconp/projecto" class="block text-gray-900">Projectos</a>
+    </li>
+    <li class="p-4 hover:bg-gray-200 flex items-center">
+      <lucide-icon name="users" class="mr-2"></lucide-icon>
+      <a routerLink="/sysconp/usuario" class="block text-gray-900">Gestão de usuário</a>
+    </li>
+    <li class="p-4 hover:bg-gray-200 flex items-center">
+      <lucide-icon name="home" class="mr-2"></lucide-icon>
+      <a routerLink="/properties" class="block text-gray-900">Imóvel</a>
+    </li>
+    <li class="p-4 hover:bg-gray-200 flex items-center">
+      <lucide-icon name="shopping-cart" class="mr-2"></lucide-icon>
+      <a routerLink="/sales" class="block text-gray-900">Vendas</a>
+    </li>
+    <li class="p-4 hover:bg-gray-200 flex items-center">
+      <lucide-icon name="file-text" class="mr-2"></lucide-icon>
+      <a routerLink="/reports" class="block text-gray-900">Relatórios</a>
+    </li>
+  </ul>
 </div>
-<div
-  class="h-40 w-full bg-cover bg-center rounded-t-lg flex justify-start items-center"
-  [ngStyle]="{'background-image': 'url(' + bgImage + ')'}"
->
+
+<div class="h-40 w-full bg-cover bg-center rounded-t-lg flex justify-start items-center"
+  [ngStyle]="{'background-image': 'url(' + bgImage + ')'}">
   <div class="p-10 h-auto" style="font-family: 'CustomFont'">
     <div class="text-white text-2xl font-black font-sans">Bem-vindo ao Sysconp</div>
     <div class="text-white font-medium font-sans text-sm mt-1">Administrador</div>
