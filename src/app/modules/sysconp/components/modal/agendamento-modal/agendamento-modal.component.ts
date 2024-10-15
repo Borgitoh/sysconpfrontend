@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ProjectoService } from '../../../service/projecto.service';
 
@@ -18,7 +18,7 @@ export class AgendamentoModalComponent implements OnInit {
     private projectoService:ProjectoService) {
     this.appointmentForm = this.fb.group({
       client: ['', Validators.required],
-      numero:['', Validators.required],
+      phone:['', Validators.required],
       project: ['', Validators.required],
       date: ['', Validators.required],
       time: ['', Validators.required],
@@ -27,13 +27,15 @@ export class AgendamentoModalComponent implements OnInit {
   }
 
   ngOnInit() {
+     this.getProjectos();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedAppointment) {
-      this.appointmentForm.setValue(this.selectedAppointment);
       this.appointmentForm.patchValue(this.selectedAppointment);
     }
-    this.getProjectos();
   }
-  
+
   getProjectos(){
     this.projectoService.getProjectos().subscribe(
       (data) => {
@@ -44,6 +46,7 @@ export class AgendamentoModalComponent implements OnInit {
       }
     );
   }
+  
   addAppointment() {
     if (this.appointmentForm.valid) {
       const newAppointment = this.appointmentForm.value;

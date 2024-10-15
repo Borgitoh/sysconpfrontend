@@ -26,10 +26,11 @@ export class AgendamentoComponent {
         this.appointments = data.map(appointment => ({
           client: appointment.name, 
           project: appointment.project.name, 
-          telefone: appointment.phone,
+          phone: appointment.phone,
           date: appointment.visitDate, 
           time: appointment.visitTime, 
-          status: appointment.status ? 'Confirmado' : 'Pendente' 
+          status: appointment.status ? 'Confirmado' : 'Pendente', 
+          id: appointment.uuid
         }));
       },
       (error) => {
@@ -60,8 +61,29 @@ export class AgendamentoComponent {
 
   editAppointment(appointment: any, index: number) {
     this.selectedAppointment = appointment; 
-    this.index = index;
     this.isModalOpen = true; 
+  }
+
+  confirmar(appointment: any, index: number) {
+    this.agendamentoService.confirmar(appointment.id).subscribe(
+      (response) => {
+        this.getAppointments();
+      },
+      (error) => {
+        console.error('Erro ao criar o agendamento:', error);
+      }
+    ); 
+  }
+  
+  cancelar(appointment: any, index: number) {
+    this.agendamentoService.cancelar(appointment.id).subscribe(
+      (response) => {
+        this.getAppointments();
+      },
+      (error) => {
+        console.error('Erro ao criar o agendamento:', error);
+      }
+    );
   }
 
   formatDate(date: string): string | null {
