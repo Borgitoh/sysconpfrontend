@@ -1,10 +1,16 @@
 <section class="h-full lg:p-10 md:p-5">
   <div class="container mx-auto mb-4">
     <div class="flex justify-between items-center mb-4">
-      <input type="text" [formControl]="searchControl" placeholder="Pesquisar projetos..."
-        class="border rounded-full p-2 pl-4 w-1/2 bg-white dark:text-white dark:bg-dark-primary dark:border-none dark:focus:border-none dark:shadow-sm focus:!ring-1 ring-offset-1 !ring-blue-800" />
-      <button (click)="openCreateModal()"
-        class="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2 dark:hover:bg-dark-primary">
+      <input
+        type="text"
+        [formControl]="searchControl"
+        placeholder="Pesquisar projetos..."
+        class="border rounded-full p-2 pl-4 w-1/2 bg-white dark:text-white dark:bg-dark-primary dark:border-none dark:focus:border-none dark:shadow-sm focus:!ring-1 ring-offset-1 !ring-blue-800"
+      />
+      <button
+        (click)="openCreateModal()"
+        class="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2 dark:hover:bg-dark-primary"
+      >
         <lucide-icon name="plus" class="w-5 h-5"></lucide-icon>
         Criar novo projeto
       </button>
@@ -23,7 +29,6 @@
             >
               <lucide-icon name="ellipsis" class="h-4 w-4 text-black dark:text-white"></lucide-icon>
             </button>
-        
             <div *ngIf="dropdownOpenIndex === i" class="dropdown-content w-56 absolute right-0 bg-white dark:bg-dark-primary shadow-lg rounded mt-1 z-10">
               <div class="dropdown-label p-2 font-semibold">Ações</div>
               <div class="dropdown-separator"></div>
@@ -52,5 +57,6 @@
     </div>
   </div>
 
-  <app-projecto-modal *ngIf="isCreateModalOpen" (close)="closeCreateModal()"></app-projecto-modal>
+  <app-projeto-modal *ngIf="isCreateModalOpen" (close)="closeCreateModal()" (addProjeto)="addProjeto($event)"></app-projeto-modal>
+   
 </section>

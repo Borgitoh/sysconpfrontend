@@ -10,7 +10,11 @@ export class ProjectoService {
 
   constructor(private http: HttpClient) {}
 
-  getProjecto(): Observable<any[]> {
+  getProjectos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl+'/all');
+  }
+
+  addItemProjecto(projecto:any): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/create/${localStorage.getItem('iduser')}`, projecto);
   }
 }

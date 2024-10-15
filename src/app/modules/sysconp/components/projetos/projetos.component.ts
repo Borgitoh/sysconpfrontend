@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Projects } from '../../enums/module.data';
+import { ProjectoService } from '../../service/projecto.service';
 
 @Component({
   selector: 'app-projetos',
@@ -10,10 +11,10 @@ import { Projects } from '../../enums/module.data';
 export class ProjetosComponent {
   isCreateModalOpen = false;
   searchControl = new FormControl('');
-  filteredProjects = Projects;
+  filteredProjects: any[] = [];
   dropdownOpenIndex : number | null = null;
 
-  constructor() {
+  constructor(private projectoService: ProjectoService) {
     this.searchControl.valueChanges.subscribe(value => {
       this.filteredProjects = Projects.filter(project =>
         project.name.toLowerCase().includes(value?.toLowerCase())
@@ -21,12 +22,40 @@ export class ProjetosComponent {
     });
   }
 
-  openCreateModal() {
-    this.isCreateModalOpen = true;
+  ngOnInit() {
+    
+    this.getProjetos();
+  }
+
+  openCreateModal() {    
+    this.isCreateModalOpen = true; 
+  }
+
+  addProjeto(projeto:any){
+    this.projectoService.addItemProjecto(projeto).subscribe(
+      (data: any) => {
+          console.log(data);
+          this.closeCreateModal();
+      },
+      (error) => {
+        console.error('Erro ao usaurio:', error);
+      }
+    );
+  }
+
+  getProjetos(){
+    this.projectoService.getProjectos().subscribe(
+      (data: any) => {
+        this.filteredProjects = data
+      },
+      (error) => {
+        console.error('Erro ao usaurio:', error);
+      }
+    );
   }
 
   closeCreateModal() {
-    this.isCreateModalOpen = false;
+    this.isCreateModalOpen = false; 
   }
 
   toggleDropdown(index: number) {

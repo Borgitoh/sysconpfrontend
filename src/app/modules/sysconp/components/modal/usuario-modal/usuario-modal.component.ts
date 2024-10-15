@@ -53,10 +53,6 @@ export class UsuarioModalComponent {
     if (this.userForm.valid && this.passwordsMatch) {
       this.addUsuario.emit(this.userForm.value)
     }
-
-    console.log("Nome:", this.userForm.get('name')?.value);
-    console.log("Email:", this.userForm.get('email')?.value);
-    console.log("Senha:", this.userForm.get('password')?.value);
     this.userForm.reset();
   }
 }

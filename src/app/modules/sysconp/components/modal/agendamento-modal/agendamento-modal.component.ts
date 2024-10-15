@@ -33,8 +33,9 @@ export class AgendamentoModalComponent implements OnInit {
     }
     this.getProjectos();
   }
+  
   getProjectos(){
-    this.projectoService.getProjecto().subscribe(
+    this.projectoService.getProjectos().subscribe(
       (data) => {
        this.projectos = data;
       },
