@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ModulosService {
-  private apiUrl = 'https://sysconp-api-1.onrender.com/modulo';
+  private apiUrl = 'https://sysconp-api-1.onrender.com/module';
 
   constructor(private http: HttpClient) {}
 

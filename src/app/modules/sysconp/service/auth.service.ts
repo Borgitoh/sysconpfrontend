@@ -30,11 +30,11 @@ export class AuthService {
   }
 
   refreshAccessToken(): Observable<any> {
-    if (!this.refreshToken) {
+    if (!localStorage.getItem('refreshToken')) {
       return of(null);
     }
 
-    return this.http.post<any>(`${this.apiUrl}refresh`, { refreshToken: this.refreshToken }).pipe(
+    return this.http.post<any>(`${this.apiUrl}refresh`, localStorage.getItem('refreshToken')).pipe(
       tap(response => {
         this.accessToken = response.accessToken;
 
