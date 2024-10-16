@@ -16,7 +16,7 @@ export class AgendamentoComponent {
   index = 0;
 
   constructor(private agendamentoService: AgendamentoService,
-              private datePipe: DatePipe) {}
+    private datePipe: DatePipe) { }
 
   ngOnInit() {
     this.getAppointments();
@@ -32,10 +32,11 @@ export class AgendamentoComponent {
           phone: appointment.phone,
           date: appointment.visitDate,
           time: appointment.visitTime,
-          status: appointment.status ? 'Confirmado' : 'Pendente',
+          status: appointment.status,
           id: appointment.uuid,
           delete: appointment.isDeleted,
-          flstatus: appointment.status
+          flstatus: appointment.status,
+          dataCriacao: this.formatDate(appointment.createdAt)
         }));
         this.allAppointments = [...this.appointments];
       },
@@ -51,8 +52,8 @@ export class AgendamentoComponent {
     } else {
       this.appointments = this.allAppointments.filter(appointment =>
         appointment.client.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-        appointment.project.toLowerCase().includes(this.searchTerm.toLowerCase())||
-        appointment.phone.toLowerCase().includes(this.searchTerm.toLowerCase())  ||
+        appointment.project.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        appointment.phone.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
         appointment.status.toLowerCase().includes(this.searchTerm.toLowerCase())
       );
     }
@@ -67,7 +68,7 @@ export class AgendamentoComponent {
   }
 
   addNewAppointment(appointment: any) {
-    if(!this.selectedAppointment){
+    if (!this.selectedAppointment) {
       this.agendamentoService.createAppointment(appointment).subscribe(
         (_) => {
           this.getAppointments();
@@ -77,8 +78,8 @@ export class AgendamentoComponent {
           console.error('Erro ao criar o agendamento:', error);
         }
       );
-    }else{
-      this.agendamentoService.editAgendamento(appointment,this.selectedAppointment.id).subscribe(
+    } else {
+      this.agendamentoService.editAgendamento(appointment, this.selectedAppointment.id).subscribe(
         (_) => {
           this.getAppointments();
           this.closeModal();
@@ -91,44 +92,44 @@ export class AgendamentoComponent {
     this.selectedAppointment = null
   }
 
-  checkStatus(appointment:any){
-    if(appointment.flstatus && !appointment.delete){
-      return 'Confirmado';
-    }if(!appointment.flstatus && appointment.delete){
+  checkStatus(appointment: any) {
+    if (appointment.flstatus && !appointment.delete) {
+      return 'Concluido';
+    } if (!appointment.flstatus && appointment.delete) {
       return 'Cancelado';
     }
     return 'Pendente';
   }
 
-  flVisivelConfirmar(appointment:any){
-    if(!appointment.flstatus && !appointment.delete){
+  flVisivelConfirmar(appointment: any) {
+    if (!appointment.flstatus && !appointment.delete) {
       return true;
     }
     return false
   }
 
-  flVisivelEditar(appointment:any){
-    if(!appointment.flstatus && !appointment.delete){
+  flVisivelEditar(appointment: any) {
+    if (!appointment.flstatus && !appointment.delete) {
       return true;
     }
     return false
   }
 
-  flVisivelCancelar(appointment:any){
-    if(appointment.flstatus && !appointment.delete){
+  flVisivelCancelar(appointment: any) {
+    if (appointment.flstatus && !appointment.delete) {
       return false;
     }
-    if(appointment.delete){
+    if (appointment.delete) {
       return false;
     }
     return true
   }
 
-  showMenu(appointment:any){
-    if(appointment.flstatus && !appointment.delete){
+  showMenu(appointment: any) {
+    if (appointment.flstatus && !appointment.delete) {
       return false;
     }
-    if(appointment.delete){
+    if (appointment.delete) {
       return false;
     }
     return true
@@ -161,8 +162,13 @@ export class AgendamentoComponent {
     );
   }
 
-  formatDate(date: string): string | null {
+  formatDateName(date: string): string | null {
     return this.datePipe.transform(date, 'dd MMMM yyyy');
+  }
+
+  formatDate(dateString: string): string | null {
+    const date = new Date(dateString);
+    return this.datePipe.transform(date, 'dd/MM/yyyy') || null;
   }
 
   toggleDropdown(index: number) {
