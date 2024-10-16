@@ -36,15 +36,24 @@ registerLocaleData(localePt);
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
-    LucideAngularModule.pick({ Edit, Trash2, Plus, Ellipsis, Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Menu, Lock, EyeOff , Eye}), 
+    LucideAngularModule.pick({ Edit, Trash2, Plus, Ellipsis, Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Menu, Lock, EyeOff , Eye}),
     SysconpRoutingModule,
     RouterModule,
     HttpClientModule,
   ],
   exports: [SpinnerComponent],
-  providers: [ DatePipe, { provide: LOCALE_ID, useValue: 'pt' }, {
+  providers: [ DatePipe,
+    { provide: LOCALE_ID,
+      useValue: 'pt'
+    },
+    {
     provide: HTTP_INTERCEPTORS,
     useClass: LoadingInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass:  TokenInterceptor,
     multi: true
   }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

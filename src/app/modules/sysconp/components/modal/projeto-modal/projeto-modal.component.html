@@ -6,42 +6,42 @@
       <button (click)="onClose()" class="text-white">X</button>
     </div>
 
-    <div class="w-full px-6">
+    <div class="w-full h-full px-6">
       <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="p-4 space-y-4">
+
         <div>
           <label for="name" class="block dark:text-white mb-1">Nome do Projeto</label>
-          <input 
-            type="text" 
-            id="name" 
-            placeholder="Nome do Projeto" 
-            class="border p-2 rounded w-full" 
-            [ngClass]="{'border-red-500': projectForm.get('name')?.invalid && projectForm.get('name')?.touched}" 
-            formControlName="name" 
-            required 
+          <input
+            type="text"
+            id="name"
+            placeholder="Nome do Projeto"
+            class="border p-2 rounded w-full"
+            [ngClass]="{'border-red-500': projectForm.get('name')?.invalid && projectForm.get('name')?.touched}"
+            formControlName="name"
+            required
           />
           <div *ngIf="projectForm.get('name')?.invalid && projectForm.get('name')?.touched" class="text-red-500 text-sm">
             Campo obrigatório
           </div>
         </div>
-  
+
         <div>
           <label for="description" class="block dark:text-white mb-1">Descrição</label>
-          <textarea 
-            id="description" 
-            class="border p-2 rounded w-full" 
-            placeholder="Descrição" 
-            rows="4" 
-            [ngClass]="{'border-red-500': projectForm.get('description')?.invalid && projectForm.get('description')?.touched}" 
-            formControlName="description" 
+          <textarea
+            id="description"
+            class="border p-2 rounded w-full"
+            placeholder="Descrição"
+            rows="4"
+            [ngClass]="{'border-red-500': projectForm.get('description')?.invalid && projectForm.get('description')?.touched}"
+            formControlName="description"
             required>
           </textarea>
           <div *ngIf="projectForm.get('description')?.invalid && projectForm.get('description')?.touched" class="text-red-500 text-sm">
             Campo obrigatório
           </div>
         </div>
-
         <div class="mt-4">
-          <button type="submit" class="mt-1 bg-[#2b407c] w-full text-white p-2 rounded">
+          <button type="submit" class="bg-blue-800 w-full text-white p-2 rounded">
             Salvar
           </button>
         </div>

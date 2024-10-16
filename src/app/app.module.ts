@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,7 +17,7 @@ import { TokenInterceptor } from './modules/sysconp/token.interceptor';
     LoginComponent
   ],
   imports: [
-    LucideAngularModule.pick({File, Home, Menu, UserCheck}), 
+    LucideAngularModule.pick({File, Home, Menu, UserCheck}),
     AppRoutingModule,
     BrowserModule,
     ReactiveFormsModule,
@@ -26,11 +26,19 @@ import { TokenInterceptor } from './modules/sysconp/token.interceptor';
     HttpClientModule
   ],
   providers: [
+    { provide: LOCALE_ID,
+      useValue: 'pt'
+    },
     {
-      provide: HTTP_INTERCEPTORS,
-      useClass: LoadingInterceptor,
-      multi: true
-    }],
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoadingInterceptor,
+    multi: true
+  },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass:  TokenInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

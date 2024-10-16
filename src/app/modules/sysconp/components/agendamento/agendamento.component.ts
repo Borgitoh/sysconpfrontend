@@ -45,7 +45,7 @@ export class AgendamentoComponent {
     );
   }
 
-  applyFilter() {
+  Filter() {
     if (this.searchTerm.trim().toLowerCase() === '') {
       this.appointments = [...this.allAppointments];
     } else {
@@ -141,7 +141,7 @@ export class AgendamentoComponent {
 
   confirmar(appointment: any, index: number) {
     this.agendamentoService.confirmar(appointment.id).subscribe(
-      (response) => {
+      (_) => {
         this.getAppointments();
       },
       (error) => {
@@ -152,7 +152,7 @@ export class AgendamentoComponent {
 
   cancelar(appointment: any, index: number) {
     this.agendamentoService.cancelar(appointment.id).subscribe(
-      (response) => {
+      (_) => {
         this.getAppointments();
       },
       (error) => {

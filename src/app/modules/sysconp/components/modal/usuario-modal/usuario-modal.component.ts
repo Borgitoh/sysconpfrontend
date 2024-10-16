@@ -38,16 +38,13 @@ export class UsuarioModalComponent {
     if (nomeParts.length === 1) {
       return nomeParts[0];
     }
-  
-    const firstnome = nomeParts[0]; 
+
+    const firstnome = nomeParts[0];
     const lastnome = nomeParts[nomeParts.length - 1];
     const initials = firstnome[0].toUpperCase() + (lastnome ? lastnome[0].toUpperCase() : '');
-  
+
     return initials;
   }
-  
-
-  
 
   onSubmit(): void {
     if (this.userForm.valid && this.passwordsMatch) {

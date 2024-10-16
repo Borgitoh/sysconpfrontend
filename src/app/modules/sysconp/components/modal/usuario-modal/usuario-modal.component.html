@@ -1,7 +1,5 @@
 <section class="container left-0 right-0 m-auto h-[80vh] flex flex-col justify-between">
-
   <div class="bg-white dark:bg-[#081023] rounded-t-lg rounded-b-lg flex-1 flex flex-col justify-center">
-    <!-- Altere a estrutura da grid para uma única coluna com elementos organizados verticalmente -->
     <div class="flex flex-col gap-8 items-center">
       <div class="flex justify-center items-center">
         <div class="relative flex items-center justify-center mt-2 w-48 h-48 rounded-full overflow-hidden bg-[#eee]">
@@ -29,16 +27,16 @@
           <div>
             <label for="password" class="block dark:text-white mb-1">Senha</label>
             <div class="relative">
-              <input 
-                id="password" 
-                [type]="showPassword ? 'text' : 'password'" 
+              <input
+                id="password"
+                [type]="showPassword ? 'text' : 'password'"
                 formControlName="password"
                 [ngClass]="{ 'border-red-500': !passwordsMatch && userForm.get('confirmPassword')?.touched }"
                 class="w-full p-2 rounded border focus:ring-1 ring-offset-1 ring-blue-800 dark:bg-dark-primary dark:border-none"
-                required 
+                required
               />
-              <button 
-                type="button" 
+              <button
+                type="button"
                 class="absolute inset-y-0 right-0 flex items-center pr-3"
                 (click)="togglePassword()">
                 <span *ngIf="showPassword"><lucide-icon name="eye"></lucide-icon></span>
@@ -46,20 +44,20 @@
               </button>
             </div>
           </div>
-          
+
           <div>
             <label for="confirmPassword" class="block dark:text-white mb-1">Confirmar Senha</label>
             <div class="relative">
-              <input 
-                id="confirmPassword" 
-                [type]="showPassword ? 'text' : 'password'" 
+              <input
+                id="confirmPassword"
+                [type]="showPassword ? 'text' : 'password'"
                 formControlName="confirmPassword"
                 [ngClass]="{ 'border-red-500': !passwordsMatch && userForm.get('confirmPassword')?.touched }"
                 class="w-full p-2 rounded border focus:ring-1 ring-offset-1 ring-blue-800 dark:bg-dark-primary dark:border-none"
-                required 
+                required
               />
-              <button 
-                type="button" 
+              <button
+                type="button"
                 class="absolute inset-y-0 right-0 flex items-center pr-3"
                 (click)="togglePassword()">
                 <span *ngIf="showPassword"><lucide-icon name="eye"></lucide-icon></span>
@@ -71,7 +69,7 @@
           <div *ngIf="!passwordsMatch && userForm.get('confirmPassword')?.touched" class="text-red-500 text-sm">
             As senhas não coincidem.
           </div>
-          
+
           <div>
             <Label className="dark:text-white mb-1">Permissão</Label>
             <select id="code" formControlName="code"   required
@@ -79,13 +77,13 @@
                 <option value="WC_PEDROMAG_MOD_ADMINISTRACAO">Administrador</option>
                 <option value="PEDROMAG_MOD_CJ">Conselho Jurídico</option>
                 <option value="WC_PS_PEDROMAG_ANA_VAL">Chefe de Departamento</option>
-                <option value="WC_PS_PEDROMAG_ANA_ANA">Analista</option> 
+                <option value="WC_PS_PEDROMAG_ANA_ANA">Analista</option>
                 <option value="notificante">Usuário</option>
             </select>
         </div>
 
           <div class="mt-4">
-            <button type="submit" class="bg-[#2b407c] w-full text-white p-2 rounded">
+            <button type="submit" class="bg-blue-800 w-full text-white p-2 rounded">
               Salvar
             </button>
           </div>

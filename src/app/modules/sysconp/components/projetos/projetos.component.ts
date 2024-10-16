@@ -23,7 +23,6 @@ export class ProjetosComponent {
   }
 
   ngOnInit() {
-
     this.getProjetos();
   }
 
