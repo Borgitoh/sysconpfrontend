@@ -18,7 +18,6 @@ export class UsuarioComponent {
     this.getUsuario();
   }
 
-  // Filtrar usuários com base no termo de pesquisa
   filterUsers() {
     this.filteredUsers = this.filteredUsers.filter(user =>
       user.name.toLowerCase().includes(this.searchTerm.toLowerCase())
@@ -51,8 +50,7 @@ export class UsuarioComponent {
   addUsuario(usuario: any) {
     this.closeModal();
     this.usuarioService.addUsuario(usuario).subscribe(
-      (data) => {
-        console.log(data);
+      (_) => {
         this.getUsuario();
       },
       (error) => {
@@ -94,5 +92,5 @@ export class UsuarioComponent {
       return this.getPermissaoDescriaco(permission.code);
     });
   }
-  
+
 }

@@ -5,7 +5,8 @@
 
   <div class="grid grid-cols-2 gap-3 justify-between items-center bg-white p-5 rounded-b-lg">
     <div class="text-sm font-bold flex gap-3 text-black">
-      <input type="text" placeholder="Filtrar" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm" />
+      <input type="text"  [(ngModel)]="searchTerm"
+      (ngModelChange)="applyFilter()"  placeholder="Filtrar" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm" />
       <input type="date" class="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm" />
     </div>
     <div class="grid grid-cols-2 gap-3">
@@ -37,24 +38,24 @@
       <tbody class="bg-white-50 dark:bg-gray-800 dark:text-white">
         <tr *ngFor="let appointment of appointments; let i = index" class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="text-center p-4">{{ appointment.client }}</td>
-          <td class="text-center p-4">{{ appointment.project }}</td>
+          <td class="text-center p-4">{{ appointment.projectname }}</td>
           <td class="text-center p-4">{{ appointment.phone }}</td>
           <td class="text-center p-4">{{ formatDate(appointment.date)}}</td>
           <td class="text-center p-4">{{ appointment.time }}</td>
-          <td class="text-center p-4">{{ appointment.status }}</td>
+          <td class="text-center p-4">{{checkStatus(appointment)}}</td>
           <td class="p-4 text-right">
-            <button (click)="toggleDropdown(i)" class="p-2">
+            <button *ngIf="showMenu(appointment)" (click)="toggleDropdown(i)" class="p-2">
               <lucide-icon name="ellipsis" class="w-5 h-5"></lucide-icon>
             </button>
-            <div [id]="'dropdown-' + i" class="absolute w-56 bg-white dark:bg-gray-800 shadow-lg rounded-lg mt-2 right-0 hidden">
-              <button (click)="confirmar(appointment, index)" class="w-full px-3 py-2 text-sm flex items-center gap-2 hover:bg-gray-200">
+            <div [id]="'dropdown-' + i" class="absolute w-35 bg-white dark:bg-gray-800 shadow-lg rounded-lg mt-2 left-70 hidden">
+              <button *ngIf="flVisivelConfirmar(appointment)" (click)="confirmar(appointment, index)" class="w-full px-3 py-2 text-sm flex items-center gap-2 hover:bg-gray-200">
                 <lucide-icon name="check-check" class="w-5 h-5"></lucide-icon> Confirmar
               </button>
-              <button (click)="editAppointment(appointment, index)"  class="w-full px-3 py-2 text-sm flex items-center gap-2 hover:bg-gray-200">
+              <button *ngIf="flVisivelEditar(appointment)" (click)="editAppointment(appointment, index)"  class="w-full px-3 py-2 text-sm flex items-center gap-2 hover:bg-gray-200">
                 <lucide-icon name="pencil" class="w-5 h-5"></lucide-icon> Editar
               </button>
               <hr class="mt-2 mb-2">
-              <button (click)="cancelar(appointment, index)" class="w-full px-3 py-2 text-sm flex items-center gap-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-md">
+              <button *ngIf="flVisivelCancelar(appointment)" (click)="cancelar(appointment, index)" class="w-full px-3 py-2 text-sm flex items-center gap-2 bg-red-100 text-red-600 hover:bg-red-200 rounded-md">
                 <lucide-icon name="circle-slash" class="w-5 h-5"></lucide-icon> Cancelar
               </button>
             </div>

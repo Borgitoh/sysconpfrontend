@@ -46,13 +46,11 @@ export class AgendamentoModalComponent implements OnInit {
       }
     );
   }
-  
+
   addAppointment() {
     if (this.appointmentForm.valid) {
-      const newAppointment = this.appointmentForm.value;
-      this.addNewAppointment.emit(newAppointment);
-      console.log('Agendamento adicionado ou editado:', newAppointment);
-      this.closeModal.emit();
+        this.addNewAppointment.emit(this.appointmentForm.value);
+       this.closeModal.emit();
     }
   }
 

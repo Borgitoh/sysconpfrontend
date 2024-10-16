@@ -23,18 +23,17 @@ export class ProjetosComponent {
   }
 
   ngOnInit() {
-    
+
     this.getProjetos();
   }
 
-  openCreateModal() {    
-    this.isCreateModalOpen = true; 
+  openCreateModal() {
+    this.isCreateModalOpen = true;
   }
 
   addProjeto(projeto:any){
     this.projectoService.addItemProjecto(projeto).subscribe(
-      (data: any) => {
-          console.log(data);
+      (_: any) => {
           this.closeCreateModal();
       },
       (error) => {
@@ -55,7 +54,7 @@ export class ProjetosComponent {
   }
 
   closeCreateModal() {
-    this.isCreateModalOpen = false; 
+    this.isCreateModalOpen = false;
   }
 
   toggleDropdown(index: number) {
@@ -63,11 +62,11 @@ export class ProjetosComponent {
   }
 
   onEdit() {
-    this.dropdownOpenIndex = null; 
+    this.dropdownOpenIndex = null;
   }
 
   onDelete() {
     this.dropdownOpenIndex = null;
   }
-  
+
 }

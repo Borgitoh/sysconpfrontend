@@ -8,10 +8,12 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./agendamento.component.scss']
 })
 export class AgendamentoComponent {
-  public appointments: any[] = [];
+  appointments: any[] = [];
+  allAppointments: any[] = [];
+  searchTerm: string = '';
   isModalOpen = false;
-  selectedAppointment: any = null; 
-  index = 0; 
+  selectedAppointment: any = null;
+  index = 0;
 
   constructor(private agendamentoService: AgendamentoService,
               private datePipe: DatePipe) {}
@@ -24,19 +26,36 @@ export class AgendamentoComponent {
     this.agendamentoService.getAppointments().subscribe(
       (data) => {
         this.appointments = data.map(appointment => ({
-          client: appointment.name, 
-          project: appointment.project.name, 
+          client: appointment.name,
+          project: appointment.project.id,
+          projectname: appointment.project.name,
           phone: appointment.phone,
-          date: appointment.visitDate, 
-          time: appointment.visitTime, 
-          status: appointment.status ? 'Confirmado' : 'Pendente', 
-          id: appointment.uuid
+          date: appointment.visitDate,
+          time: appointment.visitTime,
+          status: appointment.status ? 'Confirmado' : 'Pendente',
+          id: appointment.uuid,
+          delete: appointment.isDeleted,
+          flstatus: appointment.status
         }));
+        this.allAppointments = [...this.appointments];
       },
       (error) => {
         console.error('Erro ao buscar agendamentos:', error);
       }
     );
+  }
+
+  applyFilter() {
+    if (this.searchTerm.trim().toLowerCase() === '') {
+      this.appointments = [...this.allAppointments];
+    } else {
+      this.appointments = this.allAppointments.filter(appointment =>
+        appointment.client.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        appointment.project.toLowerCase().includes(this.searchTerm.toLowerCase())||
+        appointment.phone.toLowerCase().includes(this.searchTerm.toLowerCase())  ||
+        appointment.status.toLowerCase().includes(this.searchTerm.toLowerCase())
+      );
+    }
   }
 
   openModal() {
@@ -48,20 +67,76 @@ export class AgendamentoComponent {
   }
 
   addNewAppointment(appointment: any) {
-    this.agendamentoService.createAppointment(appointment).subscribe(
-      (response) => {
-        this.getAppointments();
-        this.closeModal();
-      },
-      (error) => {
-        console.error('Erro ao criar o agendamento:', error);
-      }
-    );
+    if(!this.selectedAppointment){
+      this.agendamentoService.createAppointment(appointment).subscribe(
+        (_) => {
+          this.getAppointments();
+          this.closeModal();
+        },
+        (error) => {
+          console.error('Erro ao criar o agendamento:', error);
+        }
+      );
+    }else{
+      this.agendamentoService.editAgendamento(appointment,this.selectedAppointment.id).subscribe(
+        (_) => {
+          this.getAppointments();
+          this.closeModal();
+        },
+        (error) => {
+          console.error('Erro ao editar o agendamento:', error);
+        }
+      );
+    }
+    this.selectedAppointment = null
+  }
+
+  checkStatus(appointment:any){
+    if(appointment.flstatus && !appointment.delete){
+      return 'Confirmado';
+    }if(!appointment.flstatus && appointment.delete){
+      return 'Cancelado';
+    }
+    return 'Pendente';
+  }
+
+  flVisivelConfirmar(appointment:any){
+    if(!appointment.flstatus && !appointment.delete){
+      return true;
+    }
+    return false
+  }
+
+  flVisivelEditar(appointment:any){
+    if(!appointment.flstatus && !appointment.delete){
+      return true;
+    }
+    return false
+  }
+
+  flVisivelCancelar(appointment:any){
+    if(appointment.flstatus && !appointment.delete){
+      return false;
+    }
+    if(appointment.delete){
+      return false;
+    }
+    return true
+  }
+
+  showMenu(appointment:any){
+    if(appointment.flstatus && !appointment.delete){
+      return false;
+    }
+    if(appointment.delete){
+      return false;
+    }
+    return true
   }
 
   editAppointment(appointment: any, index: number) {
-    this.selectedAppointment = appointment; 
-    this.isModalOpen = true; 
+    this.selectedAppointment = appointment;
+    this.isModalOpen = true;
   }
 
   confirmar(appointment: any, index: number) {
@@ -72,9 +147,9 @@ export class AgendamentoComponent {
       (error) => {
         console.error('Erro ao criar o agendamento:', error);
       }
-    ); 
+    );
   }
-  
+
   cancelar(appointment: any, index: number) {
     this.agendamentoService.cancelar(appointment.id).subscribe(
       (response) => {
@@ -87,7 +162,7 @@ export class AgendamentoComponent {
   }
 
   formatDate(date: string): string | null {
-    return this.datePipe.transform(date, 'dd MMMM yyyy'); 
+    return this.datePipe.transform(date, 'dd MMMM yyyy');
   }
 
   toggleDropdown(index: number) {

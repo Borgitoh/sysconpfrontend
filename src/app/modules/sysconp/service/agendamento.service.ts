@@ -6,38 +6,38 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AgendamentoService {
-  private apiUrl = 'https://sysconp-api-1.onrender.com/appointments'; 
-  private apiUrl2 = 'https://sysconp-api-1.onrender.com/appointment'; 
+  private apiUrl = 'https://sysconp-api-1.onrender.com/appointments';
+  private apiUrl2 = 'https://sysconp-api-1.onrender.com/appointment';
 
   constructor(private http: HttpClient) {}
 
   getAppointments(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl+'/all');
   }
-  
+
 
   createAppointment(appointment: any): Observable<any> {
     const transformedAppointment = {
-      name: appointment.client,       
-      phone: String (appointment.numero),      
-      visitDate: appointment.date,    
-      visitTime: appointment.time,    
+      name: appointment.client,
+      phone: String (appointment.phone),
+      visitDate: appointment.date,
+      visitTime: appointment.time,
       projectId: appointment.project
     };
 
     return this.http.post<any>(`${this.apiUrl}/create/${localStorage.getItem('iduser')}`, transformedAppointment);
   }
 
-  editAgendamento (appointment: any){
+  editAgendamento (appointment: any, id:any){
     const transformedAppointment = {
-      name: appointment.client,       
-      phone: String (appointment.numero),      
-      visitDate: appointment.date,    
-      visitTime: appointment.time,    
-      projectId: appointment.project
+      name: appointment.client,
+      phone: String (appointment.phone),
+      visitDate: appointment.date,
+      visitTime: appointment.time,
+      projectId: String (appointment.project)
     };
 
-    return this.http.put<any>(`${this.apiUrl2}/update/${localStorage.getItem('iduser')}`, transformedAppointment);
+    return this.http.put<any>(`${this.apiUrl2}/update/${id}`, transformedAppointment);
   }
 
   confirmar (id: any){
@@ -45,7 +45,7 @@ export class AgendamentoService {
   }
 
   cancelar (id: any){
-    return this.http.put<any>(`${this.apiUrl2}/cancel/${id}`,id);
+    return this.http.delete<any>(`${this.apiUrl2}/cancel/${id}`,id);
   }
-  
+
 }

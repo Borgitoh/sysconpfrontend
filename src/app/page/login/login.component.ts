@@ -25,7 +25,6 @@ export class LoginComponent  {
      this.flLogin = true;
       this.authService.login(this.loginForm.value).subscribe({
         next: (user:any) => {
-          console.log('Login bem-sucedido:', user);
           this.router.navigate(['/sysconp']);
         },
         error: (error:any) => {
