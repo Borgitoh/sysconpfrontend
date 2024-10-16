@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { UsersData } from '../../enums/module.data';
-import { Router } from '@angular/router';
 import { UsuarioService } from '../../service/usuario.service';
 @Component({
   selector: 'app-usuario',
