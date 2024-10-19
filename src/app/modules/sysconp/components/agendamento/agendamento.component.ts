@@ -171,6 +171,15 @@ export class AgendamentoComponent {
     return this.datePipe.transform(date, 'dd/MM/yyyy') || null;
   }
 
+  formatPhone(phone: string): string {
+    if (!phone) {
+      return '';
+    }
+
+    const formattedPhone = phone.replace(/^(\d{3})(\d{3})(\d{3})$/, '+244 $1 $2 $3');
+    return formattedPhone;
+  }
+
   toggleDropdown(index: number) {
     const dropdown = document.getElementById(`dropdown-${index}`);
     if (dropdown) dropdown.classList.toggle('hidden');

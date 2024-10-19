@@ -11,8 +11,11 @@
       </div>
       <div class="mb-4">
         <label for="phone" class="block text-sm font-medium text-gray-700">Telefone</label>
-        <input formControlName="phone" id="phone" type="number" required class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm" />
+        <input formControlName="phone" id="phone" type="text" required
+               mask=" 000-000-000" prefix="+244"
+               class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm" />
       </div>
+
       <div class="mb-4">
         <label for="project" class="block text-sm font-medium text-gray-700">Projeto</label>
         <select
@@ -26,7 +29,7 @@
             {{ projecto.name }}
           </option>
         </select>
-      </div>      
+      </div>
       <div class="mb-4">
         <label for="date" class="block text-sm font-medium text-gray-700">Data</label>
         <input formControlName="date" type="date" id="date" required class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm" />

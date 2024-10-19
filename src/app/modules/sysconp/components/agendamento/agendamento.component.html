@@ -39,7 +39,7 @@
         <tr *ngFor="let appointment of appointments; let i = index" class="hover:bg-gray-100 dark:hover:bg-gray-700">
           <td class="text-center p-4">{{ appointment.client }}</td>
           <td class="text-center p-4">{{ appointment.projectname }}</td>
-          <td class="text-center p-4">{{ appointment.phone }}</td>
+          <td class="text-center p-4">{{ formatPhone(appointment.phone) }}</td>
           <td class="text-center p-4">{{ formatDateName(appointment.date)}}</td>
           <td class="text-center p-4">{{ appointment.time }}</td>
           <td class="text-center p-4">{{checkStatus(appointment)}}</td>

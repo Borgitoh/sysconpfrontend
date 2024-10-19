@@ -21,6 +21,8 @@ import { LoadingInterceptor } from './loading.interceptor';
 import { ModulosComponent } from './components/modulos/modulos.component';
 import { MudulosModalComponent } from './components/modal/mudulos-modal/mudulos-modal.component';
 import { TimeAgoPipe } from './pipe/time-ago.pipe';
+import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+
 registerLocaleData(localePt);
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ registerLocaleData(localePt);
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    NgxMaskDirective,
     LucideAngularModule.pick({UserRoundCog, Settings, Edit, Trash2, Plus, Ellipsis, Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Menu, Lock, EyeOff , Eye}),
     SysconpRoutingModule,
     RouterModule,
@@ -49,6 +52,7 @@ registerLocaleData(localePt);
   ],
   exports: [SpinnerComponent],
   providers: [ DatePipe,
+    provideNgxMask(),
     { provide: LOCALE_ID,
       useValue: 'pt'
     },
