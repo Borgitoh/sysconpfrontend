@@ -27,13 +27,18 @@ export class LoginComponent  {
      this.flLogin = true;
       this.authService.login(this.loginForm.value).subscribe({
         next: (user:any) => {
-          if(user.changePassword && !user.isDeleted){
-            this.router.navigate(['/senha/'+user.uuid]);
+          if(user.user.changePassword && !user.user.isDeleted){
+            this.router.navigate(['/senha/'+user.user.uuid]);
+          }else{
+            if(user.isDeleted){
+              'Erro ao fazer login'
+           }else{
+            localStorage.setItem("user", JSON.stringify(user.user));
+            this.router.navigate(['/sysconp']);
+           }
           }
-          if(user.isDeleted){
-             'Erro ao fazer login'
-          }
-          this.router.navigate(['/sysconp']);
+
+
         },
         error: (error:any) => {
           console.error('Erro ao fazer login:', error);

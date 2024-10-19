@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="relative" (click)="showUserMen()" (mouseleave)="showUserMenu = false">
+    <div class="relative" (click)="showUserMen()">
       <button class="text-white focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor">
@@ -55,11 +55,11 @@
             d="M5.121 18.364A9 9 0 1118.364 5.121 9 9 0 015.121 18.364zM15 11a3 3 0 11-6 0 3 3 0 016 0zm-6 6a6 6 0 1112 0H9z" />
         </svg>
       </button>
-      <div *ngIf="showUserMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-40">
+      <div (mouseleave)="showUserMenu = false" *ngIf="showUserMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-40">
         <div class="p-2">
           <ul>
             <li class="p-2 hover:bg-gray-200"><a routerLink="/profile">Meu Perfil</a></li>
-            <li class="p-2 hover:bg-gray-200"><a routerLink="/logout">Sair</a></li>
+            <li class="p-2 hover:bg-gray-200" (click)="sair()">Sair</li>
           </ul>
         </div>
       </div>
@@ -84,36 +84,35 @@
   </div>
 
   <ul class="mt-4">
-
-    <li (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
+    <li *ngIf="hasPermission('WC_PEDROMAG_MOD_ADMINISTRACAO','PEDROMAG_MOD_CJ','WC_PS_PEDROMAG_ANA_VAL','WC_PS_PEDROMAG_ANA_ANA')" (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
       <lucide-icon name="home" class="mr-2"></lucide-icon>
       <a routerLink="/sysconp" class="block text-gray-900">Dashboard</a>
     </li>
-    <li (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
+    <li *ngIf="hasPermission('WC_PEDROMAG_MOD_ADMINISTRACAO','PEDROMAG_MOD_CJ','WC_PS_PEDROMAG_ANA_VAL','WC_PS_PEDROMAG_ANA_ANA')" (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
       <lucide-icon name="clock-3" class="mr-2"></lucide-icon>
       <a routerLink="/sysconp/agendamentos" class="block text-gray-900">Agendamentos</a>
     </li>
-    <li (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
+    <li *ngIf="hasPermission('WC_PEDROMAG_MOD_ADMINISTRACAO','PEDROMAG_MOD_CJ','WC_PS_PEDROMAG_ANA_VAL')" (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
       <lucide-icon name="briefcase" class="mr-2"></lucide-icon>
       <a routerLink="/sysconp/projecto" class="block text-gray-900">Projectos</a>
     </li>
-    <li (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
+    <li *ngIf="hasPermission('WC_PEDROMAG_MOD_ADMINISTRACAO')" (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
       <lucide-icon name="users" class="mr-2"></lucide-icon>
       <a routerLink="/sysconp/usuario" class="block text-gray-900">Gestão de usuário</a>
     </li>
-    <li (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
+    <li *ngIf="hasPermission('WC_PEDROMAG_MOD_ADMINISTRACAO')" (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
       <lucide-icon name="settings" class="mr-2"></lucide-icon>
       <a routerLink="/sysconp/modulos" class="block text-gray-900">Gerir Modulos</a>
     </li>
-    <li (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
+    <li *ngIf="hasPermission('WC_PEDROMAG_MOD_ADMINISTRACAO','PEDROMAG_MOD_CJ','WC_PS_PEDROMAG_ANA_VAL','WC_PS_PEDROMAG_ANA_ANA')" (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
       <lucide-icon name="home" class="mr-2"></lucide-icon>
       <a routerLink="/properties" class="block text-gray-900">Imóvel</a>
     </li>
-    <li (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
+    <li *ngIf="hasPermission('WC_PEDROMAG_MOD_ADMINISTRACAO','PEDROMAG_MOD_CJ','WC_PS_PEDROMAG_ANA_VAL','WC_PS_PEDROMAG_ANA_ANA')" (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
       <lucide-icon name="shopping-cart" class="mr-2"></lucide-icon>
       <a routerLink="/sales" class="block text-gray-900">Vendas</a>
     </li>
-    <li (click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
+    <li *ngIf="hasPermission('WC_PEDROMAG_MOD_ADMINISTRACAO','PEDROMAG_MOD_CJ','WC_PS_PEDROMAG_ANA_VAL')"(click)="toggleSidebar()" class="p-4 hover:bg-gray-200 flex items-center">
       <lucide-icon name="file-text" class="mr-2"></lucide-icon>
       <a routerLink="/reports" class="block text-gray-900">Relatórios</a>
     </li>
@@ -124,6 +123,6 @@
   [ngStyle]="{'background-image': 'url(' + bgImage + ')'}">
   <div class="p-10 h-auto" style="font-family: 'CustomFont'">
     <div class="text-white text-2xl font-black font-sans">Bem-vindo ao Sysconp</div>
-    <div class="text-white font-medium font-sans text-sm mt-1">Administrador</div>
+    <div class="text-white font-medium font-sans text-sm mt-1">{{user.name}}</div>
   </div>
 </div>

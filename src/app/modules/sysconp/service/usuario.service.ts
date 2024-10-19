@@ -24,6 +24,7 @@ export class UsuarioService {
 
     return this.http.put<any>(`${this.apiUrl}/update/${id}`, usuario);
   }
+
   editSenha(usuario: any, id:any): Observable<any> {
 
     return this.http.put<any>(`${this.apiUrl}/update/change-password/${id}`, usuario);

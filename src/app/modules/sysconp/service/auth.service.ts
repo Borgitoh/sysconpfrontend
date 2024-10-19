@@ -60,5 +60,7 @@ export class AuthService {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('iduser');
     localStorage.removeItem('refreshToken');
+    localStorage.removeItem('user');
+    this.redirectToLogin();
   }
 }

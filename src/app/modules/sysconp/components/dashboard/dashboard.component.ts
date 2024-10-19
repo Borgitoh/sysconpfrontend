@@ -12,8 +12,11 @@ export class DashboardComponent {
   recentAgendamentoHour: number = 0;
   totalConcluido:number = 0;
   percentConcluido: number = 0;
+  user: any = '';
 
-  constructor(private agendamentoService: AgendamentoService,) { }
+  constructor(private agendamentoService: AgendamentoService) {
+    this.user = JSON.parse(localStorage.getItem('user') ?? '{}');
+  }
 
   ngOnInit() {
     this.getAppointments();

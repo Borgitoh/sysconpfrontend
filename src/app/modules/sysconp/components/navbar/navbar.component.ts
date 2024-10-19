@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AgendamentoService } from '../../service/agendamento.service';
 import { DatePipe } from '@angular/common';
+import { AuthService } from '../../service/auth.service';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -14,26 +15,46 @@ export class NavbarComponent {
   recentAgendamento:any [] = [];
   agendamentosAmanha :any [] = [];
   datahoramanha: any = '';
+  user: any = '';
+  agendamento = {
+    createdAt: '2024-10-18T:00:00Z',
+  };
 
   constructor(private agendamentoService: AgendamentoService,
-    private datePipe: DatePipe) { }
+              private authService: AuthService,
+              private datePipe: DatePipe) {
+                this.user = JSON.parse(localStorage.getItem('user') ?? '{}')
+              }
 
   ngOnInit() {
     this.getAppointments();
   }
 
-  agendamento = {
-    createdAt: '2024-10-18T:00:00Z',
-  };
-
   toggleSidebar() {
     this.sidebarOpen = !this.sidebarOpen;
   }
+
   showNotification(){
     this.showNotifications= !this.showNotifications
   }
+
+  hasPermission(...permissions: string[]): boolean {
+    if (!this.user || !this.user.permission) {
+      return false;
+    }
+
+    return permissions.some(permission =>
+      this.user.permission.some((userPerm:any) => userPerm.code === permission)
+    );
+  }
+
+
   showUserMen(){
     this.showUserMenu = !this.showUserMenu
+  }
+
+  sair(){
+    this.authService.logout()
   }
 
   getAppointments() {
