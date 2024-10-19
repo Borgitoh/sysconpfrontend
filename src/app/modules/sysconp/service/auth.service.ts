@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class AuthService {
   private userSubject: BehaviorSubject<any> = new BehaviorSubject(null);
   public user$: Observable<any> = this.userSubject.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient,
+              private router: Router) {}
 
   login(login:any): Observable<any> {
     return this.http.post<any>(this.apiUrl + 'login',login).pipe(
@@ -45,6 +47,10 @@ export class AuthService {
         return of(null);
       })
     );
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
   }
 
   logout() {
