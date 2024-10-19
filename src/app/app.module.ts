@@ -10,11 +10,13 @@ import { LucideAngularModule, File, Home, Menu, UserCheck,FileIcon  } from 'luci
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LoadingInterceptor } from './modules/sysconp/loading.interceptor';
 import { TokenInterceptor } from './modules/sysconp/token.interceptor';
+import { ResetSenhaComponent } from './page/reset-senha/reset-senha.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ResetSenhaComponent
   ],
   imports: [
     LucideAngularModule.pick({File, Home, Menu, UserCheck}),

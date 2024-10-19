@@ -35,7 +35,7 @@
             </button>
             <div *ngIf="dropdownOpen === i"
               class="absolute right-0 w-36 bg-white dark:bg-gray-800 shadow-lg rounded-lg mt-2">
-              <button class="w-full px-3 py-2 text-sm flex items-center hover:bg-gray-200">
+              <button  (click)="editUsuario(user)" class="w-full px-3 py-2 text-sm flex items-center hover:bg-gray-200">
                 <lucide-icon name="edit" class="mr-2 h-4 w-4"></lucide-icon>
                 Editar
               </button>
@@ -61,7 +61,7 @@
         <button (click)="closeModal()" class="text-white hover:text-gray-300">X</button>
       </div>
       <div class="p-6 overflow-y-auto">
-        <app-usuario-modal (addUsuario)="addUsuario($event)"></app-usuario-modal>
+        <app-usuario-modal (addUsuario)="addUsuario($event)"  [selectedUsuario]="selectedUsuario"></app-usuario-modal>
       </div>
     </div>
   </div>

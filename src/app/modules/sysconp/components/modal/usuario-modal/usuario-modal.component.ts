@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class UsuarioModalComponent {
   @Output() addUsuario = new EventEmitter<any>();
+  @Input() selectedUsuario: any;
   userForm: FormGroup;
   showPassword: boolean = false;
   passwordsMatch: boolean = true;
@@ -26,6 +27,12 @@ export class UsuarioModalComponent {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.selectedUsuario) {
+      this.userForm.patchValue(this.selectedUsuario);
+    }
+  }
+  
   togglePassword(): void {
     this.showPassword = !this.showPassword;
   }

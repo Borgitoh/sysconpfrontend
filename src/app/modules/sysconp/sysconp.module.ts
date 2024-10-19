@@ -20,6 +20,7 @@ import { TokenInterceptor } from './token.interceptor';
 import { LoadingInterceptor } from './loading.interceptor';
 import { ModulosComponent } from './components/modulos/modulos.component';
 import { MudulosModalComponent } from './components/modal/mudulos-modal/mudulos-modal.component';
+import { TimeAgoPipe } from './pipe/time-ago.pipe';
 registerLocaleData(localePt);
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ registerLocaleData(localePt);
     ProjetosComponent,
     ProjetoModalComponent,
     ModulosComponent,
-    MudulosModalComponent
+    MudulosModalComponent,
+    TimeAgoPipe
   ],
   imports: [
     CommonModule,

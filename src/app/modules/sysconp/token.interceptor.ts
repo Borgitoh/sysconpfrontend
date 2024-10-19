@@ -8,49 +8,48 @@ import { AuthService } from './service/auth.service';
 export class TokenInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
 
-   removeDuplicateUrl(url: string): string {
+  removeDuplicateUrl(url: string): string {
     const regex = /(https?:\/\/[^\s\/]+)(\/\1)+/g;
     return url.replace(regex, '$1$2');
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token: any = this.authService;
+    const accessToken = localStorage.getItem('accessToken'); // Obtenha o token diretamente
     let clonedRequest = req;
 
-    // const apiUrl = 'https://sysconp-api-1.onrender.com';
-    //  let modifiedUrl = this. removeDuplicateUrl(`${apiUrl}${req.url}`) ;
-    if (token) {
+    // Caso o token exista, clone a requisição adicionando o cabeçalho Authorization
+    if (accessToken) {
       clonedRequest = req.clone({
-        // url: modifiedUrl,
         setHeaders: {
-          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          Authorization: `Bearer ${accessToken}`
         }
-      });
-    } else {
-      clonedRequest = req.clone({
-        // url: modifiedUrl,
       });
     }
 
     return next.handle(clonedRequest).pipe(
       catchError(err => {
-        if (err.status === 401) {
-          return this.authService.refreshAccessToken().pipe(
-            switchMap(newToken => {
-              if (newToken) {
-                clonedRequest = req.clone({
-                  // url: modifiedUrl,
-                  setHeaders: {
-                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`
-                  }
-                });
-                return next.handle(clonedRequest);
-              }
-              return throwError(err);
-            })
-          );
-        }
-        return throwError(err);
+        // if (err.status === 401) {
+        //   // Se o token for inválido (401), tente atualizá-lo
+        //   return this.authService.refreshAccessToken().pipe(
+        //     switchMap(newToken => {
+        //       if (newToken) {
+        //         // Atualize o token no localStorage se a atualização for bem-sucedida
+        //         localStorage.setItem('accessToken', newToken);
+
+        //         // Clone novamente a requisição com o novo token
+        //         clonedRequest = req.clone({
+        //           setHeaders: {
+        //             Authorization: `Bearer ${newToken}`
+        //           }
+        //         });
+
+        //         return next.handle(clonedRequest); // Tente novamente a requisição
+        //       }
+        //       return throwError(err); // Se a atualização falhar, lance o erro
+        //     })
+        //   );
+        // }
+        return throwError(err); // Para outros erros, apenas lance o erro
       })
     );
   }

@@ -10,6 +10,7 @@ export class UsuarioComponent {
   filteredUsers: any[] = [];
   dropdownOpen: number | null = null;
   isModalOpen = false;
+  selectedUsuario: any = null;
 
   constructor(private usuarioService: UsuarioService) {
     this.getUsuario();
@@ -23,6 +24,12 @@ export class UsuarioComponent {
 
   closeModal() {
     this.isModalOpen = false;
+  }
+
+  editUsuario(usuario:any) {
+    this.selectedUsuario = usuario
+    this.selectedUsuario.code = usuario.permission[0].code
+    this.isModalOpen = true;
   }
 
   getUsuario() {
@@ -46,14 +53,28 @@ export class UsuarioComponent {
 
   addUsuario(usuario: any) {
     this.closeModal();
-    this.usuarioService.addUsuario(usuario).subscribe(
-      (_) => {
-        this.getUsuario();
-      },
-      (error) => {
-        console.error('Erro ao usaurio:', error);
-      }
-    );
+    if(!this.selectedUsuario){
+      this.usuarioService.addUsuario(usuario).subscribe(
+        (_) => {
+          this.getUsuario();
+        },
+        (error) => {
+          console.error('Erro ao usaurio:', error);
+        }
+      );
+    }else{
+      this.usuarioService.editUsuario(usuario, this.selectedUsuario.uuid).subscribe(
+        (_) => {
+          this.getUsuario();
+        },
+        (error) => {
+          console.error('Erro ao usaurio:', error);
+        }
+      );
+    }
+
+    this.selectedUsuario = null
+
   }
 
   getInitials(nome: any) {

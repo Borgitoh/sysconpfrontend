@@ -12,7 +12,9 @@ export class LoginComponent  {
   loginForm: FormGroup;
   flLogin = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder,
+              private authService: AuthService,
+              private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -25,6 +27,12 @@ export class LoginComponent  {
      this.flLogin = true;
       this.authService.login(this.loginForm.value).subscribe({
         next: (user:any) => {
+          if(user.changePassword && !user.isDeleted){
+            this.router.navigate(['/senha/'+user.uuid]);
+          }
+          if(user.isDeleted){
+             'Erro ao fazer login'
+          }
           this.router.navigate(['/sysconp']);
         },
         error: (error:any) => {

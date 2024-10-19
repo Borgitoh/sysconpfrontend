@@ -15,6 +15,10 @@ export class AgendamentoService {
     return this.http.get<any[]>(this.apiUrl+'/all');
   }
 
+  getAppointmentsHoje(dado:any): Observable<any[]> {
+  return this.http.get<any[]>(`${this.apiUrl}/today`);
+  }
+
 
   createAppointment(appointment: any): Observable<any> {
     const transformedAppointment = {

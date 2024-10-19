@@ -1,6 +1,6 @@
 <div class="space-y-6 mt-6">
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-    <ng-container *ngFor="let card of [{title: 'Receita Total', value: '45.231,89 kz', change: '+20,1% em relação ao mês passado'}, {title: 'Assinaturas', value: '+2.350', change: '+180,1% em relação ao mês passado'}, {title: 'Vendas', value: '+12.234', change: '+19% em relação ao mês passado'}, {title: 'Ativos Agora', value: '+573', change: '+201 desde a última hora'}]">
+    <ng-container *ngFor="let card of [{title: 'Receita Total', value: '45.231,89 kz', change: '+20,1% em relação ao mês passado'}, {title: 'Imoveis vendidos', value: '+2.350Kz', change: '+180,1% em relação ao mês passado'}]">
       <div class="dark:border-none dark:bg-dark-primary border rounded-lg p-4">
         <div class="flex flex-row items-center justify-between space-y-0 pb-2">
           <span class="text-sm font-medium">{{ card.title }}</span>
@@ -23,6 +23,48 @@
         </div>
       </div>
     </ng-container>
+    <div class="dark:border-none dark:bg-dark-primary border rounded-lg p-4">
+      <div class="flex flex-row items-center justify-between space-y-0 pb-2">
+        <span class="text-sm font-medium">Total de Agendamentos</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          class="h-4 w-4 text-muted-foreground"
+        >
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+        </svg>
+      </div>
+      <div>
+        <div class="text-2xl font-bold">+{{totalAgendamento}}</div>
+        <p class="text-xs text-muted-foreground">+{{recentAgendamentoHour}} desde a última hora</p>
+      </div>
+    </div>
+    <div class="dark:border-none dark:bg-dark-primary border rounded-lg p-4">
+      <div class="flex flex-row items-center justify-between space-y-0 pb-2">
+        <span class="text-sm font-medium">Agendamento Conluido</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          class="h-4 w-4 text-muted-foreground"
+        >
+          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+        </svg>
+      </div>
+      <div>
+        <div class="text-2xl font-bold">+{{totalConcluido}}</div>
+        <p class="text-xs text-muted-foreground">+{{percentConcluido}}% Agendamento Concluido</p>
+      </div>
+    </div>
   </div>
 
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
@@ -32,17 +74,22 @@
       </div>
     </div>
     <div class="col-span-3 dark:border-none dark:bg-dark-primary border rounded-lg p-4">
-      <div class="font-medium">Vendas Recentes</div>
+      <div class="font-medium">Agendamentos Recentes</div>
       <div>
         <div class="space-y-8 pt-3">
-          <ng-container *ngFor="let sale of recentSales">
+          <ng-container *ngFor="let Agendamento of recentAgendamento.slice(0,4)">
             <div class="flex items-center">
-              <img class="h-9 w-9 rounded-full" [src]="sale.avatar" alt="Avatar" />
+              <div
+              class="relative flex items-center justify-center mt-2 w-24 h-24 rounded-full overflow-hidden bg-[#eee]">
+              <span *ngIf="Agendamento.client" class="text-gray-500 text-2xl">
+                {{ getInitials(Agendamento.client) }}
+              </span>
+            </div>
               <div class="ml-4 space-y-1">
-                <p class="text-sm font-medium leading-none">{{ sale.name }}</p>
-                <p class="text-sm text-muted-foreground">{{ sale.email }}</p>
+                <p class="text-sm font-medium leading-none">{{ Agendamento.client }}</p>
+                <p class="text-sm text-muted-foreground">{{ Agendamento.phone }}</p>
               </div>
-              <div class="ml-auto font-medium">{{ sale.amount }}</div>
+              <div class="ml-auto font-medium">{{checkStatus(Agendamento) }}</div>
             </div>
           </ng-container>
         </div>

@@ -14,7 +14,7 @@
   </div>
 
   <div class="flex items-center space-x-6">
-    <div class="relative" (mouseenter)="showNotifications = true" (mouseleave)="showNotifications = false">
+    <div class="relative"  (click)="showNotification()">
       <button class="text-white focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor">
@@ -23,14 +23,14 @@
         </svg>
         <span class="absolute top-0 right-0 block h-3 w-3 bg-red-600 rounded-full border border-white"></span>
       </button>
-      <div *ngIf="showNotifications" class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg z-40">
+      <div (mouseleave)="showNotifications = false" *ngIf="showNotifications" class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg z-40">
         <div class="p-2">
           <h3 class="font-bold text-gray-800">Notificações</h3>
           <ul>
-            <li class="p-2 hover:bg-gray-200">
+            <li class="p-2 hover:bg-gray-200" *ngIf="agendamentosAmanha.length">
               <div class="font-semibold">Novo Agendamento</div>
-              <div class="text-gray-600 text-sm">Você tem um novo agendamento para amanhã.</div>
-              <div class="text-gray-400 text-xs">5 minutos atrás</div>
+              <div class="text-gray-600 text-sm">{{ agendamentosAmanha.length === 1 ? 'Você tem um novo agendamento para amanhã.': '+' + agendamentosAmanha.length + ' agendamentos para amanhã' }}</div>
+              <div class="text-gray-400 text-xs"> {{ datahoramanha | timeAgo }}</div>
             </li>
             <li class="p-2 hover:bg-gray-200">
               <div class="font-semibold text-blue-600">+5 imóveis vendidos</div>
@@ -47,7 +47,7 @@
       </div>
     </div>
 
-    <div class="relative" (mouseenter)="showUserMenu = true" (mouseleave)="showUserMenu = false">
+    <div class="relative" (click)="showUserMen()" (mouseleave)="showUserMenu = false">
       <button class="text-white focus:outline-none">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2"
           stroke="currentColor">
