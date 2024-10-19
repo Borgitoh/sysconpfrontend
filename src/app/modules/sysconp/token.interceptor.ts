@@ -28,7 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return next.handle(clonedRequest).pipe(
       catchError(err => {
-        // if (err.status === 401) {
+       // if (err.status === 401) {
         //   // Se o token for inválido (401), tente atualizá-lo
         //   return this.authService.refreshAccessToken().pipe(
         //     switchMap(newToken => {

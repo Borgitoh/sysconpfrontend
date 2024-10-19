@@ -49,11 +49,7 @@
 
     <div class="relative" (click)="showUserMen()">
       <button class="text-white focus:outline-none">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="2"
-          stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round"
-            d="M5.121 18.364A9 9 0 1118.364 5.121 9 9 0 015.121 18.364zM15 11a3 3 0 11-6 0 3 3 0 016 0zm-6 6a6 6 0 1112 0H9z" />
-        </svg>
+        <lucide-icon name="user-round-cog"  class="h-8 w-8"></lucide-icon>
       </button>
       <div (mouseleave)="showUserMenu = false" *ngIf="showUserMenu" class="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg z-40">
         <div class="p-2">

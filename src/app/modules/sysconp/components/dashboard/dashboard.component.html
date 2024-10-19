@@ -1,6 +1,6 @@
 <div class="space-y-6 mt-6">
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-    <ng-container *ngFor="let card of [{title: 'Receita Total', value: '45.231,89 kz', change: '+20,1% em relação ao mês passado'}, {title: 'Imoveis vendidos', value: '+2.350Kz', change: '+180,1% em relação ao mês passado'}]">
+    <ng-container *ngFor="let card of [{title: 'Receita Total', value: '45.231,89 kz', change: '+20,1% em relação ao mês passado'}, {title: 'Imoveis vendidos', value: '+2.350', change: '+180,1% em relação ao mês passado'}]">
       <div class="dark:border-none dark:bg-dark-primary border rounded-lg p-4">
         <div class="flex flex-row items-center justify-between space-y-0 pb-2">
           <span class="text-sm font-medium">{{ card.title }}</span>
@@ -62,7 +62,7 @@
       </div>
       <div>
         <div class="text-2xl font-bold">+{{totalConcluido}}</div>
-        <p class="text-xs text-muted-foreground">+{{percentConcluido}}% Agendamento Concluido</p>
+        <p class="text-xs text-muted-foreground">+{{ percentConcluido }}% Agendamento Concluido</p>
       </div>
     </div>
   </div>
