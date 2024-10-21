@@ -13,6 +13,8 @@ export class UsuarioModalComponent {
   userForm: FormGroup;
   showPassword: boolean = false;
   passwordsMatch: boolean = true;
+  flVisivelEndereco:  boolean = false;
+  submitted: boolean = false;
   provincias: any[] = [];
   municipios: any[] = [];
   distritos: any[] = [];
@@ -62,12 +64,47 @@ export class UsuarioModalComponent {
         this.userForm.controls['bairro'].setValue('');
       }
     });
+
+    this.userForm.get('code')?.valueChanges.subscribe(value => {
+      if (value) {
+          this.flVisivelEndereco = value === 'notificante'
+          this.selectClient(value === 'notificante');
+      }
+    });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.selectedUsuario) {
       this.userForm.patchValue(this.selectedUsuario);
     }
+  }
+
+  selectClient(cliente:any){
+    if(cliente){
+      this.userForm.controls['provincia'].setValidators(Validators.required);
+      this.userForm.controls['municipio'].setValidators(Validators.required);
+      this.userForm.controls['distrito'].setValidators(Validators.required);
+      this.userForm.controls['bairro'].setValidators(Validators.required);
+
+    }else{
+      this.userForm.controls['provincia'].clearValidators();
+      this.userForm.controls['municipio'].clearValidators();
+      this.userForm.controls['distrito'].clearValidators();
+      this.userForm.controls['bairro'].clearValidators();
+      this.clearEndereco();
+    }
+    this.userForm.controls['provincia'].updateValueAndValidity();
+    this.userForm.controls['municipio'].updateValueAndValidity();
+    this.userForm.controls['distrito'].updateValueAndValidity();
+    this.userForm.controls['bairro'].updateValueAndValidity();
+  }
+
+  clearEndereco(){
+    this.userForm.controls['provincia'].setValue('');
+    this.userForm.controls['municipio'].setValue('');
+    this.userForm.controls['distrito'].setValue('');
+    this.userForm.controls['bairro'].setValue('');
+    this.userForm.controls['morada'].setValue('');
   }
 
   togglePassword(): void {
@@ -138,9 +175,11 @@ export class UsuarioModalComponent {
   }
 
   onSubmit(): void {
+    this.submitted = false;
     if (this.userForm.valid && this.passwordsMatch) {
       this.addUsuario.emit(this.userForm.value)
+      this.userForm.reset();
     }
-    this.userForm.reset();
+
   }
 }

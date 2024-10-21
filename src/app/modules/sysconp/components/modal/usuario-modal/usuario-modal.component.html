@@ -69,62 +69,74 @@
           <div *ngIf="!passwordsMatch && userForm.get('confirmPassword')?.touched" class="text-red-500 text-sm">
             As senhas não coincidem.
           </div>
-          <div class="grid grid-cols-2 gap-4">
+
+          <div class="grid grid-cols-2 gap-4" *ngIf="flVisivelEndereco">
             <div>
               <label class="dark:text-white mb-1">Província</label>
-              <select id="provincia" formControlName="provincia" required
+              <select id="provincia" formControlName="provincia"
                 class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
                 <option *ngFor="let provincia of provincias"
                   [value]="provincia.cdProvincia + ';' + provincia.noProvincia">
                   {{provincia.noProvincia}}
                 </option>
               </select>
+              <div *ngIf="(userForm.get('provincia')?.invalid && submitted ) || userForm.get('provincia')?.touched"
+              class="text-red-500 text-sm">
+              Campo obrigatório
+            </div>
             </div>
 
             <div>
               <label class="dark:text-white mb-1">Município</label>
-              <select id="municipio" formControlName="municipio" required
+              <select id="municipio" formControlName="municipio"
                 class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
                 <option *ngFor="let municipio of municipios"
                   [value]="municipio.cdMunicipio + ';' + municipio.noMunicipio">
                   {{municipio.noMunicipio}}
                 </option>
               </select>
+              <div *ngIf="(userForm.get('municipio')?.invalid && submitted ) || userForm.get('municipio')?.touched"
+              class="text-red-500 text-sm">
+              Campo obrigatório
+            </div>
             </div>
 
             <div>
               <label class="dark:text-white mb-1">Distrito/Comuna</label>
-              <select id="distrito" formControlName="distrito" required
+              <select id="distrito" formControlName="distrito"
                 class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
                 <option *ngFor="let comuna of distritos" [value]="comuna.cdComuna + ';' + comuna.noComuna">
                   {{comuna.noComuna}}
                 </option>
               </select>
+              <div *ngIf="(userForm.get('distrito')?.invalid && submitted )|| userForm.get('distrito')?.touched"
+              class="text-red-500 text-sm">
+              Campo obrigatório
+            </div>
             </div>
 
             <div>
               <label class="dark:text-white mb-1">Bairro</label>
-              <select id="bairro" formControlName="bairro" required
+              <select id="bairro" formControlName="bairro"
                 class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
                 <option *ngFor="let bairro of bairros" [value]="bairro.cdBairro + ';' + bairro.noBairro">
                   {{bairro.noBairro}}
                 </option>
               </select>
+              <div *ngIf="(userForm.get('bairro')?.invalid && submitted )|| userForm.get('bairro')?.touched"
+              class="text-red-500 text-sm">
+              Campo obrigatório
+            </div>
             </div>
 
             <div class="col-span-2">
               <label for="morada" class="block dark:text-white mb-1">Morada</label>
               <input type="text" id="morada" class="border p-2 rounded w-full"
                 [ngClass]="{'border-red-500': userForm.get('morada')?.invalid && userForm.get('morada')?.touched}"
-                formControlName="morada" required />
-              <div *ngIf="userForm.get('morada')?.invalid && userForm.get('morada')?.touched"
-                class="text-red-500 text-sm">
-                Campo obrigatório
-              </div>
+                formControlName="morada" />
+
             </div>
           </div>
-
-
           <div class="mt-4">
             <button type="submit" class="bg-blue-800 w-full text-white p-2 rounded">
               Salvar
