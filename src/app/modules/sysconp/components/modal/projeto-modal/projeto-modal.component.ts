@@ -21,7 +21,7 @@ export class ProjetoModalComponent {
   }
 
   constructor(private fb: FormBuilder,
-    private enderecoService: EnderecoService) {
+              private enderecoService: EnderecoService) {
     this.projectForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -32,6 +32,7 @@ export class ProjetoModalComponent {
       bairro: ['', Validators.required],
       morada: ['', ],
     });
+
     this.getProvincias();
 
     this.projectForm.get('provincia')?.valueChanges.subscribe(value => {

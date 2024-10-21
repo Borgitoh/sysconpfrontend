@@ -19,6 +19,18 @@
           </div>
 
           <div>
+            <Label className="dark:text-white mb-1">Permissão</Label>
+            <select id="code" formControlName="code" required
+              class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+              <option value="WC_PEDROMAG_MOD_ADMINISTRACAO">Administrador</option>
+              <option value="PEDROMAG_MOD_CJ">Conselho Jurídico</option>
+              <option value="WC_PS_PEDROMAG_ANA_VAL">Chefe de Departamento</option>
+              <option value="WC_PS_PEDROMAG_ANA_ANA">Analista</option>
+              <option value="notificante">Cliente</option>
+            </select>
+          </div>
+
+          <div>
             <label for="email" class="block dark:text-white mb-1">Email</label>
             <input id="email" type="email" formControlName="email"
               class="w-full p-2 rounded border focus:ring-1 ring-offset-1 ring-blue-800 dark:bg-dark-primary dark:border-none"
@@ -27,17 +39,11 @@
           <div>
             <label for="password" class="block dark:text-white mb-1">Senha</label>
             <div class="relative">
-              <input
-                id="password"
-                [type]="showPassword ? 'text' : 'password'"
-                formControlName="password"
+              <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
                 [ngClass]="{ 'border-red-500': !passwordsMatch && userForm.get('confirmPassword')?.touched }"
                 class="w-full p-2 rounded border focus:ring-1 ring-offset-1 ring-blue-800 dark:bg-dark-primary dark:border-none"
-                required
-              />
-              <button
-                type="button"
-                class="absolute inset-y-0 right-0 flex items-center pr-3"
+                required />
+              <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3"
                 (click)="togglePassword()">
                 <span *ngIf="showPassword"><lucide-icon name="eye"></lucide-icon></span>
                 <span *ngIf="!showPassword"><lucide-icon name="eye-off"></lucide-icon></span>
@@ -48,17 +54,11 @@
           <div>
             <label for="confirmPassword" class="block dark:text-white mb-1">Confirmar Senha</label>
             <div class="relative">
-              <input
-                id="confirmPassword"
-                [type]="showPassword ? 'text' : 'password'"
-                formControlName="confirmPassword"
+              <input id="confirmPassword" [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword"
                 [ngClass]="{ 'border-red-500': !passwordsMatch && userForm.get('confirmPassword')?.touched }"
                 class="w-full p-2 rounded border focus:ring-1 ring-offset-1 ring-blue-800 dark:bg-dark-primary dark:border-none"
-                required
-              />
-              <button
-                type="button"
-                class="absolute inset-y-0 right-0 flex items-center pr-3"
+                required />
+              <button type="button" class="absolute inset-y-0 right-0 flex items-center pr-3"
                 (click)="togglePassword()">
                 <span *ngIf="showPassword"><lucide-icon name="eye"></lucide-icon></span>
                 <span *ngIf="!showPassword"><lucide-icon name="eye-off"></lucide-icon></span>
@@ -69,18 +69,61 @@
           <div *ngIf="!passwordsMatch && userForm.get('confirmPassword')?.touched" class="text-red-500 text-sm">
             As senhas não coincidem.
           </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="dark:text-white mb-1">Província</label>
+              <select id="provincia" formControlName="provincia" required
+                class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+                <option *ngFor="let provincia of provincias"
+                  [value]="provincia.cdProvincia + ';' + provincia.noProvincia">
+                  {{provincia.noProvincia}}
+                </option>
+              </select>
+            </div>
 
-          <div>
-            <Label className="dark:text-white mb-1">Permissão</Label>
-            <select id="code" formControlName="code"   required
-                 class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
-                <option value="WC_PEDROMAG_MOD_ADMINISTRACAO">Administrador</option>
-                <option value="PEDROMAG_MOD_CJ">Conselho Jurídico</option>
-                <option value="WC_PS_PEDROMAG_ANA_VAL">Chefe de Departamento</option>
-                <option value="WC_PS_PEDROMAG_ANA_ANA">Analista</option>
-                <option value="notificante">Usuário</option>
-            </select>
-        </div>
+            <div>
+              <label class="dark:text-white mb-1">Município</label>
+              <select id="municipio" formControlName="municipio" required
+                class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+                <option *ngFor="let municipio of municipios"
+                  [value]="municipio.cdMunicipio + ';' + municipio.noMunicipio">
+                  {{municipio.noMunicipio}}
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <label class="dark:text-white mb-1">Distrito/Comuna</label>
+              <select id="distrito" formControlName="distrito" required
+                class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+                <option *ngFor="let comuna of distritos" [value]="comuna.cdComuna + ';' + comuna.noComuna">
+                  {{comuna.noComuna}}
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <label class="dark:text-white mb-1">Bairro</label>
+              <select id="bairro" formControlName="bairro" required
+                class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+                <option *ngFor="let bairro of bairros" [value]="bairro.cdBairro + ';' + bairro.noBairro">
+                  {{bairro.noBairro}}
+                </option>
+              </select>
+            </div>
+
+            <div class="col-span-2">
+              <label for="morada" class="block dark:text-white mb-1">Morada</label>
+              <input type="text" id="morada" class="border p-2 rounded w-full"
+                [ngClass]="{'border-red-500': userForm.get('morada')?.invalid && userForm.get('morada')?.touched}"
+                formControlName="morada" required />
+              <div *ngIf="userForm.get('morada')?.invalid && userForm.get('morada')?.touched"
+                class="text-red-500 text-sm">
+                Campo obrigatório
+              </div>
+            </div>
+          </div>
+
 
           <div class="mt-4">
             <button type="submit" class="bg-blue-800 w-full text-white p-2 rounded">
