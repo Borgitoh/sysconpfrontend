@@ -21,7 +21,7 @@
           <path stroke-linecap="round" stroke-linejoin="round"
             d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6 6 0 10-12 0v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m0 0v1a3 3 0 106 0v-1m-6 0h6" />
         </svg>
-        <span class="absolute top-0 right-0 block h-3 w-3 bg-red-600 rounded-full border border-white"></span>
+        <span *ngIf="agendamentosAmanha.length"  class="absolute top-0 right-0 block h-3 w-3 bg-red-600 rounded-full border border-white"></span>
       </button>
       <div (mouseleave)="showNotifications = false" *ngIf="showNotifications" class="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg z-40">
         <div class="p-2">
@@ -36,11 +36,6 @@
               <div class="font-semibold text-blue-600">+5 imóveis vendidos</div>
               <div class="text-gray-600 text-sm">5 imóveis vendidos recentemente.</div>
               <div class="text-gray-400 text-xs">Atualizado há 10 minutos</div>
-            </li>
-            <li class="p-2 hover:bg-gray-200">
-              <div class="font-semibold">Atualização do Sistema</div>
-              <div class="text-gray-600 text-sm">Uma nova versão do sistema está disponível.</div>
-              <div class="text-gray-400 text-xs">15 minutos atrás</div>
             </li>
           </ul>
         </div>
