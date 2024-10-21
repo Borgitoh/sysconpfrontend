@@ -1,51 +1,109 @@
 <div class="fixed inset-0 flex items-center justify-center z-50">
   <div class="bg-black opacity-50 absolute inset-0"></div>
-  <div class="bg-white dark:bg-dark-primary rounded-lg w-[80%] max-w-lg h-[80vh] z-10">
-    <div class="flex justify-between items-center GD-SP mb-4 bg-blue-800 p-3 rounded-t-lg">
-      <div class="text-xl font-bold text-white">Criar Novo Projeto</div>
-      <button (click)="onClose()" class="text-white">X</button>
-    </div>
+  <div class="bg-white dark:bg-dark-primary rounded-lg w-[80%] max-w-3xl h-[90%] z-10 overflow-y-auto">
+      <div class="flex justify-between items-center GD-SP mb-4 bg-blue-800 p-3 rounded-t-lg">
+          <div class="text-xl font-bold text-white">Criar Novo Projeto</div>
+          <button (click)="onClose()" class="text-white">X</button>
+      </div>
 
-    <div class="w-full h-full px-6">
-      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="p-4 space-y-4">
+      <div class="w-full px-6">
+          <form [formGroup]="projectForm" (ngSubmit)="onSubmit()" class="p-4 space-y-4">
+              <div>
+                  <label for="name" class="block dark:text-white mb-1">Nome do Projeto</label>
+                  <input type="text" id="name" class="border p-2 rounded w-full"
+                      [ngClass]="{'border-red-500': projectForm.get('name')?.invalid && projectForm.get('name')?.touched}"
+                      formControlName="name" required />
+                  <div *ngIf="projectForm.get('name')?.invalid && projectForm.get('name')?.touched"
+                      class="text-red-500 text-sm">
+                      Campo obrigatório
+                  </div>
+              </div>
+              <div class="grid grid-cols-2 gap-4">
+                  <div>
+                      <label for="quantidade" class="block dark:text-white mb-1">Quantidade de imóveis</label>
+                      <input type="number" id="quantidade" class="border p-2 rounded w-full"
+                          [ngClass]="{'border-red-500': projectForm.get('quantidade')?.invalid && projectForm.get('quantidade')?.touched}"
+                          formControlName="quantidade" required />
+                      <div *ngIf="projectForm.get('quantidade')?.invalid && projectForm.get('quantidade')?.touched"
+                          class="text-red-500 text-sm">
+                          Campo obrigatório
+                      </div>
+                  </div>
 
-        <div>
-          <label for="name" class="block dark:text-white mb-1">Nome do Projeto</label>
-          <input
-            type="text"
-            id="name"
-            placeholder="Nome do Projeto"
-            class="border p-2 rounded w-full"
-            [ngClass]="{'border-red-500': projectForm.get('name')?.invalid && projectForm.get('name')?.touched}"
-            formControlName="name"
-            required
-          />
-          <div *ngIf="projectForm.get('name')?.invalid && projectForm.get('name')?.touched" class="text-red-500 text-sm">
-            Campo obrigatório
-          </div>
-        </div>
+                  <div>
+                      <label class="dark:text-white mb-1">Província</label>
+                      <select id="provincia" formControlName="provincia" required
+                          class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+                          <option *ngFor="let provincia of provincias"
+                                  [value]="provincia.cdProvincia + ';' + provincia.noProvincia">
+                              {{provincia.noProvincia}}
+                          </option>
+                      </select>
+                  </div>
 
-        <div>
-          <label for="description" class="block dark:text-white mb-1">Descrição</label>
-          <textarea
-            id="description"
-            class="border p-2 rounded w-full"
-            placeholder="Descrição"
-            rows="4"
-            [ngClass]="{'border-red-500': projectForm.get('description')?.invalid && projectForm.get('description')?.touched}"
-            formControlName="description"
-            required>
-          </textarea>
-          <div *ngIf="projectForm.get('description')?.invalid && projectForm.get('description')?.touched" class="text-red-500 text-sm">
-            Campo obrigatório
-          </div>
-        </div>
-        <div class="mt-4">
-          <button type="submit" class="bg-blue-800 w-full text-white p-2 rounded">
-            Salvar
-          </button>
-        </div>
-      </form>
-    </div>
+                  <div>
+                      <label class="dark:text-white mb-1">Município</label>
+                      <select id="municipio" formControlName="municipio" required
+                          class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+                          <option *ngFor="let municipio of municipios"
+                                  [value]="municipio.cdMunicipio + ';' + municipio.noMunicipio">
+                              {{municipio.noMunicipio}}
+                          </option>
+                      </select>
+                  </div>
+
+                  <div>
+                      <label class="dark:text-white mb-1">Distrito/Comuna</label>
+                      <select id="distrito" formControlName="distrito" required
+                          class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+                          <option *ngFor="let comuna of distritos"
+                                  [value]="comuna.cdComuna + ';' + comuna.noComuna">
+                              {{comuna.noComuna}}
+                          </option>
+                      </select>
+                  </div>
+
+                  <div>
+                      <label class="dark:text-white mb-1">Bairro</label>
+                      <select id="bairro" formControlName="bairro" required
+                          class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+                          <option *ngFor="let bairro of bairros"
+                                  [value]="bairro.cdBairro + ';' + bairro.noBairro">
+                              {{bairro.noBairro}}
+                          </option>
+                      </select>
+                  </div>
+
+                  <div>
+                      <label for="morada" class="block dark:text-white mb-1">Morada</label>
+                      <input type="text" id="morada" class="border p-2 rounded w-full"
+                          [ngClass]="{'border-red-500': projectForm.get('morada')?.invalid && projectForm.get('morada')?.touched}"
+                          formControlName="morada" required />
+                      <div *ngIf="projectForm.get('morada')?.invalid && projectForm.get('morada')?.touched"
+                          class="text-red-500 text-sm">
+                          Campo obrigatório
+                      </div>
+                  </div>
+
+                  <div class="col-span-2">
+                      <label for="description" class="block dark:text-white mb-1">Descrição</label>
+                      <textarea id="description" class="border p-2 rounded w-full" rows="4"
+                          [ngClass]="{'border-red-500': projectForm.get('description')?.invalid && projectForm.get('description')?.touched}"
+                          formControlName="description" required>
+                      </textarea>
+                      <div *ngIf="projectForm.get('description')?.invalid && projectForm.get('description')?.touched"
+                          class="text-red-500 text-sm">
+                          Campo obrigatório
+                      </div>
+                  </div>
+              </div>
+
+              <div class="mt-4">
+                  <button type="submit" class="bg-blue-800 w-full text-white p-2 rounded">
+                      Salvar
+                  </button>
+              </div>
+          </form>
+      </div>
   </div>
 </div>
