@@ -5,7 +5,7 @@ import { SysconpRoutingModule } from './sysconp-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { Briefcase, CalendarDays, CheckCheck, CircleSlash, Clock3, Download, Edit, Ellipsis, Eye, EyeOff, File, FileIcon, FileText, Home, Lock, LucideAngularModule, Menu, Pencil, Plus, Settings, ShoppingCart, Trash2, UserCheck, UserRoundCog, Users } from 'lucide-angular';
+import { Briefcase, CalendarDays, CheckCheck, CircleSlash, Clock3, Download, Edit, Ellipsis, Eye, EyeOff, File, FileIcon, FileText, HandCoins, Home, Lock, LucideAngularModule, Menu, Pencil, Plus, Settings, ShoppingCart, Trash2, UserCheck, UserRoundCog, Users } from 'lucide-angular';
 import { AgendamentoComponent } from './components/agendamento/agendamento.component';
 import { AgendamentoModalComponent } from './components/modal/agendamento-modal/agendamento-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -22,6 +22,7 @@ import { ModulosComponent } from './components/modulos/modulos.component';
 import { MudulosModalComponent } from './components/modal/mudulos-modal/mudulos-modal.component';
 import { TimeAgoPipe } from './pipe/time-ago.pipe';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { ContaCorrenteComponent } from './components/conta-corrente/conta-corrente.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -38,14 +39,15 @@ registerLocaleData(localePt);
     ProjetoModalComponent,
     ModulosComponent,
     MudulosModalComponent,
-    TimeAgoPipe
+    TimeAgoPipe,
+    ContaCorrenteComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
     NgxMaskDirective,
-    LucideAngularModule.pick({UserRoundCog, Settings, Edit, Trash2, Plus, Ellipsis, Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Menu, Lock, EyeOff , Eye}),
+    LucideAngularModule.pick({HandCoins,UserRoundCog, Settings, Edit, Trash2, Plus, Ellipsis, Home, CalendarDays, Briefcase, FileText, Users, ShoppingCart, Clock3,  Download, CheckCheck, Pencil, CircleSlash, Menu, Lock, EyeOff , Eye}),
     SysconpRoutingModule,
     RouterModule,
     HttpClientModule,

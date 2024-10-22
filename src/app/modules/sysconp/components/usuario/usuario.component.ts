@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UsuarioService } from '../../service/usuario.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-usuario',
   templateUrl: './usuario.component.html',
@@ -12,7 +13,8 @@ export class UsuarioComponent {
   isModalOpen = false;
   selectedUsuario: any = null;
 
-  constructor(private usuarioService: UsuarioService) {
+  constructor(private usuarioService: UsuarioService,
+              private router: Router) {
     this.getUsuario();
   }
 
@@ -103,6 +105,11 @@ export class UsuarioComponent {
       'notificante': 'Cliente'
     };
     return PermissaoMap[PermissaoCode] || PermissaoCode;
+  }
+
+  goConta(user:any){
+    this.router.navigate(['sysconp/conta/'+user.uuid]);
+
   }
 
   getFilteredPermissions(permissaos: any[]): string[] {

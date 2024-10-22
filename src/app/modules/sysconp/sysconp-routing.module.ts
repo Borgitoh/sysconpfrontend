@@ -6,6 +6,7 @@ import { AgendamentoComponent } from './components/agendamento/agendamento.compo
 import { UsuarioComponent } from './components/usuario/usuario.component';
 import { ProjetosComponent } from './components/projetos/projetos.component';
 import { ModulosComponent } from './components/modulos/modulos.component';
+import { ContaCorrenteComponent } from './components/conta-corrente/conta-corrente.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       { path: 'usuario', component: UsuarioComponent },
       { path: 'projecto', component: ProjetosComponent },
       { path: 'modulos', component: ModulosComponent },
+      { path: 'conta/:id', component: ContaCorrenteComponent }
     ]
   }
 ];
