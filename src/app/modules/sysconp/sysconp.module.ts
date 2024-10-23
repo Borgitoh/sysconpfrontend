@@ -26,6 +26,8 @@ import { ContaCorrenteComponent } from './components/conta-corrente/conta-corren
 import { ImoveisComponent } from './components/imoveis/imoveis.component';
 import { ImoveisModalComponent } from './components/modal/imoveis-modal/imoveis-modal.component';
 import { TipoImoveisModalComponent } from './components/modal/tipo-imoveis-modal/tipo-imoveis-modal.component';
+import { VendasComponent } from './components/vendas/vendas.component';
+import { VendasModalComponent } from './components/modal/vendas-modal/vendas-modal.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -46,7 +48,9 @@ registerLocaleData(localePt);
     ContaCorrenteComponent,
     ImoveisComponent,
     ImoveisModalComponent,
-    TipoImoveisModalComponent
+    TipoImoveisModalComponent,
+    VendasComponent,
+    VendasModalComponent
   ],
   imports: [
     CommonModule,

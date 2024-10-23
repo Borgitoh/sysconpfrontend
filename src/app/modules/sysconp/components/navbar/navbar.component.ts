@@ -8,6 +8,7 @@ import { AuthService } from '../../service/auth.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+
   bgImage = 'assets/img/fundo.png';
   sidebarOpen = false;
   showNotifications = false;

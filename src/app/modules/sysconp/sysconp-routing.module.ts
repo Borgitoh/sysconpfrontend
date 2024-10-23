@@ -8,6 +8,7 @@ import { ProjetosComponent } from './components/projetos/projetos.component';
 import { ModulosComponent } from './components/modulos/modulos.component';
 import { ContaCorrenteComponent } from './components/conta-corrente/conta-corrente.component';
 import { ImoveisComponent } from './components/imoveis/imoveis.component';
+import { VendasComponent } from './components/vendas/vendas.component';
 
 const routes: Routes = [
   {
@@ -20,7 +21,8 @@ const routes: Routes = [
       { path: 'projecto', component: ProjetosComponent },
       { path: 'modulos', component: ModulosComponent },
       { path: 'conta/:id', component: ContaCorrenteComponent },
-      { path: 'imovel', component: ImoveisComponent }
+      { path: 'imovel', component: ImoveisComponent },
+      { path: 'vendas', component: VendasComponent }
     ]
   }
 ];
