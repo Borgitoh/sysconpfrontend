@@ -2,8 +2,18 @@
   <div class="container mx-auto mb-4">
     <div class="flex justify-between items-center mb-4">
       <input type="text" placeholder="Pesquisar usuários..." [(ngModel)]="searchTerm" (ngModelChange)="filterUsers()"
-        class="border rounded-full p-2 pl-4 w-1/2 bg-white dark:text-white dark:bg-dark-primary dark:border-none focus:ring-1 ring-offset-1 ring-blue-800" />
-      <button (click)="onCreateUser()"
+        class="border rounded-full p-2 pl-4 w-1/3 bg-white dark:text-white dark:bg-dark-primary dark:border-none focus:ring-1 ring-offset-1 ring-blue-800" />
+
+
+          <select  placeholder="Tipo de Usuario"  [(ngModel)]="searchTerm" (ngModelChange)="filterByPerfil()"
+            class="border rounded-full p-2 pl-4 w-1/3  bg-white dark:text-white dark:bg-dark-primary dark:border-none focus:ring-1 ring-offset-1 ring-blue-800">
+            <option value="WC_PEDROMAG_MOD_ADMINISTRACAO">Administrador</option>
+            <option value="PEDROMAG_MOD_CJ">Conselho Jurídico</option>
+            <option value="WC_PS_PEDROMAG_ANA_VAL">Chefe de Departamento</option>
+            <option value="WC_PS_PEDROMAG_ANA_ANA">Analista</option>
+            <option value="notificante">Cliente</option>
+          </select>
+         <button (click)="onCreateUser()"
         class="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2 dark:hover:bg-dark-primary">
         <lucide-icon name="plus" class="w-5 h-5"></lucide-icon>
         Criar novo usuário
