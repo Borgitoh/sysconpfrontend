@@ -17,7 +17,7 @@ export class ProjetosComponent {
 
   constructor(private projectoService: ProjectoService) {
     this.searchControl.valueChanges.subscribe(value => {
-      this.filteredProjects = Projects.filter(project =>
+      this.filteredProjects = this.filteredProjects.filter(project =>
         project.name.toLowerCase().includes(value?.toLowerCase())
       );
     });

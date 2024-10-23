@@ -23,6 +23,9 @@ import { MudulosModalComponent } from './components/modal/mudulos-modal/mudulos-
 import { TimeAgoPipe } from './pipe/time-ago.pipe';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { ContaCorrenteComponent } from './components/conta-corrente/conta-corrente.component';
+import { ImoveisComponent } from './components/imoveis/imoveis.component';
+import { ImoveisModalComponent } from './components/modal/imoveis-modal/imoveis-modal.component';
+import { TipoImoveisModalComponent } from './components/modal/tipo-imoveis-modal/tipo-imoveis-modal.component';
 
 registerLocaleData(localePt);
 @NgModule({
@@ -40,7 +43,10 @@ registerLocaleData(localePt);
     ModulosComponent,
     MudulosModalComponent,
     TimeAgoPipe,
-    ContaCorrenteComponent
+    ContaCorrenteComponent,
+    ImoveisComponent,
+    ImoveisModalComponent,
+    TipoImoveisModalComponent
   ],
   imports: [
     CommonModule,

@@ -113,7 +113,6 @@ export class ProjetoModalComponent {
     );
   }
 
-
   onSubmit() {
     if (this.projectForm.valid) {
       this.addProjeto.emit(this.projectForm.value)
