@@ -33,7 +33,7 @@
               <div class="dropdown-label p-2 font-semibold">Ações</div>
               <div class="dropdown-separator"></div>
               <div
-                (click)="onEdit()"
+                (click)="onEdit(project)"
                 class="flex items-center cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <lucide-icon name="edit" class="mr-2 h-4 w-4"></lucide-icon>
@@ -48,7 +48,7 @@
               </div>
             </div>
           </div>
-        </div>        
+        </div>
       </div>
       <div class="bg-white dark:bg-dark-primary dark:shadow-lg shadow-sm w-full rounded-lg p-6 text-center relative">
         <h2 class="mt-1 text-sm font-semibold text-gray-800 dark:text-white">{{ project.name }}</h2>
@@ -57,6 +57,6 @@
     </div>
   </div>
 
-  <app-projeto-modal *ngIf="isCreateModalOpen" (close)="closeCreateModal()" (addProjeto)="addProjeto($event)"></app-projeto-modal>
-   
+  <app-projeto-modal *ngIf="isCreateModalOpen" (close)="closeCreateModal()" (addProjeto)="addProjeto($event)" [selectedProjecto]="selectedProjecto"></app-projeto-modal>
+
 </section>

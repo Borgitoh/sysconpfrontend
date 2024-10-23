@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EnderecoService } from '../../../service/endereco.service';
 
@@ -10,6 +10,8 @@ import { EnderecoService } from '../../../service/endereco.service';
 export class ProjetoModalComponent {
   @Output() close = new EventEmitter<void>();
   @Output() addProjeto = new EventEmitter<any>();
+  @Input() selectedProjecto: any;
+
   projectForm: FormGroup;
   provincias: any[] = [];
   municipios: any[] = [];
@@ -25,7 +27,7 @@ export class ProjetoModalComponent {
     this.projectForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      quantidade: ['', Validators.required],
+      quantity: ['', Validators.required],
       provincia: ['', Validators.required],
       municipio: ['', Validators.required],
       distrito: ['', Validators.required],
@@ -57,6 +59,12 @@ export class ProjetoModalComponent {
         this.projectForm.controls['bairro'].setValue('');
       }
     });
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.selectedProjecto) {
+      this.projectForm.patchValue(this.selectedProjecto);
+    }
   }
 
   getProvincias(){

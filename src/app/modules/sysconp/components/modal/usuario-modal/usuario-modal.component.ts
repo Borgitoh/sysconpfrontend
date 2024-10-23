@@ -10,6 +10,7 @@ import { EnderecoService } from '../../../service/endereco.service';
 export class UsuarioModalComponent {
   @Output() addUsuario = new EventEmitter<any>();
   @Input() selectedUsuario: any;
+
   userForm: FormGroup;
   showPassword: boolean = false;
   passwordsMatch: boolean = true;

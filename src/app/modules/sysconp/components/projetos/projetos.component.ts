@@ -13,6 +13,7 @@ export class ProjetosComponent {
   searchControl = new FormControl('');
   filteredProjects: any[] = [];
   dropdownOpenIndex : number | null = null;
+  selectedProjecto: any = null;
 
   constructor(private projectoService: ProjectoService) {
     this.searchControl.valueChanges.subscribe(value => {
@@ -31,14 +32,28 @@ export class ProjetosComponent {
   }
 
   addProjeto(projeto:any){
-    this.projectoService.addItemProjecto(projeto).subscribe(
-      (_: any) => {
-          this.closeCreateModal();
-      },
-      (error) => {
-        console.error('Erro ao usaurio:', error);
-      }
-    );
+    if(this.selectedProjecto){
+      this.projectoService.addItemProjecto(projeto).subscribe(
+        (_: any) => {
+          this.getProjetos()
+            this.closeCreateModal();
+        },
+        (error) => {
+          console.error('Erro ao projecto:', error);
+        }
+      );
+    }else{
+      this.projectoService.addItemProjecto(projeto).subscribe(
+        (_: any) => {
+          this.getProjetos();
+            this.closeCreateModal();
+        },
+        (error) => {
+          console.error('Erro ao projecto:', error);
+        }
+      );
+    }
+
   }
 
   getProjetos(){
@@ -60,8 +75,10 @@ export class ProjetosComponent {
     this.dropdownOpenIndex = this.dropdownOpenIndex === index ? null : index;
   }
 
-  onEdit() {
+  onEdit(projecto:any) {
     this.dropdownOpenIndex = null;
+    this.selectedProjecto =projecto
+    this.isCreateModalOpen = true;
   }
 
   onDelete() {
