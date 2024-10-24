@@ -25,18 +25,53 @@ export class ImoveisComponent {
         project.name.toLowerCase().includes(value?.toLowerCase())
       );
     });
+
+    this.getImovel();
   }
 
   ngOnInit() {
   }
 
   addImovel(imovel:any){
-
+    this.imoveisService.addImovel(imovel).subscribe(
+      (_: any) => {
+          this.closeCreateModal();
+          this.getImovel();
+      },
+      (error) => {
+        console.error('Erro ao projecto:', error);
+      }
+    );
   }
+
+  calculateParcela(finalityValue: number, initialValue: number, installment: number){
+    const totalAmount = finalityValue - initialValue;
+    return Math.ceil(totalAmount / installment);
+  }
+
+  calculateYears(installments: number): number {
+    return Math.floor(installments / 12);
+  }
+
+  calculateRemainingMonths(installments: number): number {
+    return installments % 12;
+  }
+
+  getImovel(){
+    this.imoveisService.getImoveis().subscribe(
+      (data: any) => {
+         this.filteredProjects = data;
+      },
+      (error) => {
+        console.error('Erro ao projecto:', error);
+      }
+    );
+  }
+
   addTipoImovel(imovel:any){
     this.tipoImoveisService.addTipoImovel(imovel).subscribe(
       (_: any) => {
-          this.closeCreateModal();
+          this.closeCreateModalTipo();
       },
       (error) => {
         console.error('Erro ao projecto:', error);

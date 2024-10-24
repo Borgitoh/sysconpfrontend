@@ -6,16 +6,16 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TipoImoveisService {
-  private apiUrl = 'https://sysconp-api-1.onrender.com/property';
+  private apiUrl = 'http://localhost:8000/tipoImovel';
 
   constructor(private http: HttpClient) {}
 
   getTipoImoveis(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}-read/types/all`);
+    return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
   addTipoImovel(imovel:any): Observable<any[]> {
 
-   return this.http.post<any[]>(`${this.apiUrl}/type/create`, imovel);
+   return this.http.post<any[]>(`${this.apiUrl}`, imovel);
   }
 }

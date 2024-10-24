@@ -1,0 +1,77 @@
+{
+  "tipoImovel": [
+    {
+      "id": "7fd9",
+      "type": "Terreno",
+      "description": "asfasfa"
+    },
+    {
+      "id": "589e",
+      "type": "Loteamento fechado",
+      "description": "agdagdagad"
+    },
+    {
+      "id": "8f91",
+      "type": "Loteamento Aberto",
+      "description": "aggadg"
+    },
+    {
+      "id": "5710",
+      "type": "LOTE  com 3 fiadas",
+      "description": "asdasdasd"
+    }
+  ],
+  "conta": [],
+  "vendas": [],
+  "pacelas": [],
+  "imovel": [
+    {
+      "id": "9a96",
+      "name": "Lote B",
+      "description": "agdgagdadggdaadg",
+      "typePropertyId": "7fd9",
+      "projectId": 6,
+      "initialValue": 5000000,
+      "installment": 300000,
+      "finalityValue": 15000000,
+      "iscupado": true,
+      "flDelete": true
+    },
+    {
+      "id": "95f1",
+      "name": "Lote B",
+      "description": "afsdafdfdaadf",
+      "typePropertyId": "7fd9",
+      "projectId": 6,
+      "initialValue": 5000000,
+      "installment": 300000,
+      "finalityValue": 15000000,
+      "iscupado": true,
+      "flDelete": true
+    },
+    {
+      "id": "4c95",
+      "name": "Lote Aa",
+      "description": "asddasdas",
+      "typePropertyId": "8f91",
+      "projectId": 6,
+      "initialValue": 1000000,
+      "installment": 200000,
+      "finalityValue": 15000000,
+      "iscupado": true,
+      "flDelete": false
+    },
+    {
+      "id": "bece",
+      "name": "Lota C",
+      "description": "sdfgsffsggfssgf",
+      "typePropertyId": "5710",
+      "projectId": "6",
+      "initialValue": 3000000,
+      "installment": 250000,
+      "finalityValue": 10000000,
+      "iscupado": true,
+      "flDelete": false
+    }
+  ]
+}

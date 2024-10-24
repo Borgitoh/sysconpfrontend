@@ -1,9 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ImoveisService {
+  private apiUrl = 'http://localhost:8000/imovel';
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getImoveis(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}`);
+  }
+
+  addImovel(imovel: any): Observable<any[]> {
+    imovel.iscupado = true;
+    imovel.flDelete = false;
+    return this.http.post<any[]>(`${this.apiUrl}`, imovel);
+  }
 }

@@ -2,15 +2,17 @@ import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TipoImoveisService } from '../../../service/tipo-imoveis.service';
 import { ProjectoService } from '../../../service/projecto.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-imoveis-modal',
   templateUrl: './imoveis-modal.component.html',
-  styleUrls: ['./imoveis-modal.component.scss']
+  styleUrls: ['./imoveis-modal.component.scss'],
+  providers: [CurrencyPipe]
 })
 export class ImoveisModalComponent {
   @Output() close = new EventEmitter<void>();
-  @Output() addTipoImovel = new EventEmitter<any>();
+  @Output() addImovel = new EventEmitter<any>();
   @Input() selectedTipoImovel: any;
 
   tipoImoveis: any[] = []
@@ -19,11 +21,13 @@ export class ImoveisModalComponent {
 
   constructor(private fb: FormBuilder,
               private tipoImoveisService: TipoImoveisService,
-              private projectoService: ProjectoService) {
+              private projectoService: ProjectoService,
+              private currencyPipe: CurrencyPipe) {
     this.ImovelForm = this.fb.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
       typePropertyId: ['', Validators.required],
+      projectId: ['', Validators.required],
       initialValue: ['', Validators.required],
       installment: ['', Validators.required],
       finalityValue: ['', Validators.required]
@@ -67,10 +71,25 @@ export class ImoveisModalComponent {
 
   onSubmit() {
     if (this.ImovelForm.valid) {
-      this.addTipoImovel.emit(this.ImovelForm.value)
+      this.addImovel.emit(this.ImovelForm.value)
       this.ImovelForm.reset();
     } else {
       this.ImovelForm.markAllAsTouched();
     }
   }
+
+  formatCurrency(field: string): void {
+    const control = this.ImovelForm.get(field);
+    if (control && control.value) {
+      const formattedValue = this.currencyPipe.transform(control.value, 'AOA', 'symbol', '1.2-2');
+      control.setValue(formattedValue);
+    }
+  }
+
+  allowOnlyNumbers(event: any): void {
+    let value = event.target.value.replace(/\D/g, '');
+    value = (Number(value) / 100).toFixed(2).replace('.', ',');
+    event.target.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+  }
+
 }
