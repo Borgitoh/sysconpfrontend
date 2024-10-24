@@ -33,6 +33,8 @@ export class UsuarioModalComponent {
       municipio: ['', ],
       distrito: ['', ],
       bairro: ['', ],
+      bi: ['', ],
+      phone:['', ],
       morada: ['', ]
     });
 
@@ -82,22 +84,27 @@ export class UsuarioModalComponent {
 
   selectClient(cliente:any){
     if(cliente){
+      this.userForm.controls['bi'].setValidators(Validators.required);
       this.userForm.controls['provincia'].setValidators(Validators.required);
       this.userForm.controls['municipio'].setValidators(Validators.required);
       this.userForm.controls['distrito'].setValidators(Validators.required);
       this.userForm.controls['bairro'].setValidators(Validators.required);
-
+      this.userForm.controls['phone'].setValidators(Validators.required);
     }else{
       this.userForm.controls['provincia'].clearValidators();
       this.userForm.controls['municipio'].clearValidators();
       this.userForm.controls['distrito'].clearValidators();
       this.userForm.controls['bairro'].clearValidators();
+      this.userForm.controls['bi'].clearValidators();
+      this.userForm.controls['phone'].clearValidators();
       this.clearEndereco();
     }
     this.userForm.controls['provincia'].updateValueAndValidity();
     this.userForm.controls['municipio'].updateValueAndValidity();
     this.userForm.controls['distrito'].updateValueAndValidity();
     this.userForm.controls['bairro'].updateValueAndValidity();
+    this.userForm.controls['bi'].updateValueAndValidity();
+    this.userForm.controls['phone'].updateValueAndValidity();
   }
 
   clearEndereco(){

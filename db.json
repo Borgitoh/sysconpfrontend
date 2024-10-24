@@ -73,5 +73,23 @@
       "iscupado": true,
       "flDelete": false
     }
+  ],
+  "clientes": [
+    {
+      "id": "fad8",
+      "name": "Erica Mendes",
+      "email": "erica.mendes@gmail.com",
+      "password": "123456789",
+      "confirmPassword": "123456789",
+      "code": "notificante",
+      "provincia": "3;Luanda",
+      "municipio": "208;Belas",
+      "distrito": "3476;Barra Do Cuanza",
+      "bairro": "32084;Miradouro Da Lua",
+      "bi": "009117643BO041",
+      "phone": "947578136",
+      "morada": "800 ",
+      "uuid": "971b5707-ea48-442e-913f-02a04cac2a04"
+    }
   ]
 }

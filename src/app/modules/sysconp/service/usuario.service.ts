@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class UsuarioService {
   private apiUrl = 'https://sysconp-api-1.onrender.com/user';
+    private apiUrl2 = 'http://localhost:8000/clientes'
 
   constructor(private http: HttpClient) {}
 
@@ -19,6 +20,12 @@ export class UsuarioService {
 
     return this.http.post<any>(`${this.apiUrl}`, usuario);
   }
+
+  addcliente(usuario: any): Observable<any> {
+
+    return this.http.post<any>(`${this.apiUrl2}`, usuario);
+  }
+
 
   editUsuario(usuario: any, id:any): Observable<any> {
 

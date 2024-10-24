@@ -60,11 +60,24 @@ export class UsuarioComponent {
     this.isModalOpen = true;
   }
 
+  addCliente(usuario:any){
+    this.usuarioService.addcliente(usuario).subscribe(
+      (_) => {
+        console.error("user add");
+      },
+      (error) => {
+        console.error('Erro ao usaurio:', error);
+      }
+    );
+  }
+
   addUsuario(usuario: any) {
     this.closeModal();
     if(!this.selectedUsuario){
       this.usuarioService.addUsuario(usuario).subscribe(
-        (_) => {
+        (dados) => {
+           usuario.uuid =dados.uuid;
+           this.addCliente(usuario);
           this.getUsuario();
         },
         (error) => {
