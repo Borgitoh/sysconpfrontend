@@ -110,10 +110,26 @@
   </ul>
 </div>
 
-<div class="h-40 w-full bg-cover bg-center rounded-t-lg flex justify-start items-center"
-  [ngStyle]="{'background-image': 'url(' + bgImage + ')'}">
+<div class="h-40 w-full bg-cover bg-center flex justify-start items-center"
+     [ngStyle]="{'background-image': 'url(' + bgImage + ')'}">
   <div class="p-10 h-auto" style="font-family: 'CustomFont'">
     <div class="text-white text-2xl font-black font-sans">Bem-vindo ao Sysconp</div>
     <div class="text-white font-medium font-sans text-sm mt-1">{{user.name}}</div>
+
+    <nav aria-label="breadcrumb" class="mt-4">
+      <ol class="flex text-white">
+        <li *ngFor="let breadcrumb of breadcrumbs; let last = last">
+          <ng-container *ngIf="!last">
+            <a [routerLink]="breadcrumb.url" class="hover:underline">{{ breadcrumb.label }}</a>
+            <span class="mx-2">/</span>
+          </ng-container>
+          <ng-container *ngIf="last">
+            <span>{{ breadcrumb.label }}</span>
+          </ng-container>
+        </li>
+      </ol>
+    </nav>
   </div>
 </div>
+
+

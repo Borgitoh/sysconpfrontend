@@ -1,1 +1,45 @@
-<p>vendas-modal works!</p>
+<div class="fixed inset-0 flex items-center justify-center z-50">
+  <div class="bg-black opacity-50 absolute inset-0"></div>
+  <div class="bg-white dark:bg-dark-primary rounded-lg w-[80%] max-w-3xl h-[90%] z-10 overflow-y-auto">
+    <div class="flex justify-between items-center GD-SP mb-4 bg-fundo p-3 rounded-t-lg">
+      <div class="text-xl font-bold text-white">Vender Imóveis</div>
+      <button (click)="onClose()" class="text-white">X</button>
+    </div>
+    <div class="w-full px-6">
+      <form [formGroup]="vendas" (ngSubmit)="onSubmit()" class="p-4 space-y-4">
+        <div>
+          <label class="dark:text-white mb-1">Selecione o Imóvel</label>
+          <select formControlName="imovel" required class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+            <option *ngFor="let imovel of imoveis" value="{{imovel.id}}">{{imovel.name}}</option>
+          </select>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="dark:text-white mb-1">Selecione o Cliente</label>
+            <select formControlName="cliente" required class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+              <option *ngFor="let cliente of clientes" value="{{cliente.id}}">{{cliente.name}}</option>
+            </select>
+          </div>
+          <div>
+            <label class="dark:text-white mb-1">Arquivo</label>
+            <input type="file" formControlName="file" (change)="onFileSelected($event)" accept=".pdf, .png, .jpeg, .jpg"
+              class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+            <div *ngIf="errorMessage" class="text-red-500 mt-2">{{ errorMessage }}</div>
+
+            <div *ngIf="filePreview" class="mt-4">
+              <img *ngIf="isImage" [src]="filePreview" class="h-32 w-32 object-cover rounded-md" />
+
+              <div *ngIf="!isImage && isPdf" class="w-full h-48">
+                <iframe [src]="filePreview" width="100%" height="100%"></iframe>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button type="submit" class="bg-blue-800 w-full text-white p-2 rounded">Salvar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

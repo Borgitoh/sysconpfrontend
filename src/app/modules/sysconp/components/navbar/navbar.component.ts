@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AgendamentoService } from '../../service/agendamento.service';
 import { DatePipe } from '@angular/common';
 import { AuthService } from '../../service/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -20,12 +21,22 @@ export class NavbarComponent {
   agendamento = {
     createdAt: '2024-10-18T:00:00Z',
   };
+  breadcrumbs: Array<{ label: string, url: string }> = [];
 
   constructor(private agendamentoService: AgendamentoService,
               private authService: AuthService,
-              private datePipe: DatePipe) {
-                this.user = JSON.parse(localStorage.getItem('user') ?? '{}')
-              }
+              private datePipe: DatePipe,
+              private router: Router,
+              private activatedRoute: ActivatedRoute) {
+
+    this.user = JSON.parse(localStorage.getItem('user') ?? '{}')
+
+    this.router.events.subscribe(() => {
+                  this.createBreadcrumbs(this.activatedRoute.root);
+    });
+
+
+  }
 
   ngOnInit() {
     this.getAppointments();
@@ -96,6 +107,25 @@ export class NavbarComponent {
   formatDate(dateString: string): string | null {
     const date = new Date(dateString);
     return this.datePipe.transform(date, 'yyyy-mm-dd') || null;
+  }
+
+  private createBreadcrumbs(route: ActivatedRoute, url: string = '', breadcrumbs: Array<{ label: string, url: string }> = []): void {
+    const children: ActivatedRoute[] = route.children;
+
+    if (children.length === 0) {
+      this.breadcrumbs = breadcrumbs;
+      return;
+    }
+
+    for (const child of children) {
+      const routeURL: string = child.snapshot.url.map(segment => segment.path).join('/');
+      if (routeURL !== '') {
+        url += `/${routeURL}`;
+      }
+
+      breadcrumbs.push({ label: routeURL, url: url });
+      this.createBreadcrumbs(child, url, breadcrumbs);
+    }
   }
 
 }

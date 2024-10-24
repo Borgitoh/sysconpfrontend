@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: 'modulos', component: ModulosComponent },
       { path: 'conta/:id', component: ContaCorrenteComponent },
       { path: 'imovel', component: ImoveisComponent },
-      { path: 'vendas', component: VendasComponent }
+      { path: 'vendas', component: VendasComponent, title:'Gestão de Vendas' }
     ]
   }
 ];

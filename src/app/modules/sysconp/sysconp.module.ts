@@ -28,6 +28,7 @@ import { ImoveisModalComponent } from './components/modal/imoveis-modal/imoveis-
 import { TipoImoveisModalComponent } from './components/modal/tipo-imoveis-modal/tipo-imoveis-modal.component';
 import { VendasComponent } from './components/vendas/vendas.component';
 import { VendasModalComponent } from './components/modal/vendas-modal/vendas-modal.component';
+import { SafeUrlPipe } from './pipe/safe-url.pipe';
 
 registerLocaleData(localePt);
 const icon: any =
@@ -57,7 +58,8 @@ const icon: any =
     EyeOff,
     Eye,
     Check,
-    Coins
+    Coins,
+    File
   }
 
 @NgModule({
@@ -80,7 +82,8 @@ const icon: any =
     ImoveisModalComponent,
     TipoImoveisModalComponent,
     VendasComponent,
-    VendasModalComponent
+    VendasModalComponent,
+    SafeUrlPipe
   ],
   imports: [
     CommonModule,

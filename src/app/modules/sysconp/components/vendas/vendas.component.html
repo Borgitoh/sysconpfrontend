@@ -57,5 +57,5 @@
     </div>
   </div>
 
-  <app-projeto-modal *ngIf="isCreateModalOpen" (close)="closeCreateModal()" (addProjeto)="addVenda($event)" [selectedVenda]="selectedVenda"></app-projeto-modal>
+  <app-vendas-modal *ngIf="isCreateModalOpen" (close)="closeCreateModal()" (addVenda)="addVenda($event)" [selectedVenda]="selectedVenda"></app-vendas-modal>
 </section>
