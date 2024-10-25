@@ -54,7 +54,8 @@ export class VendasComponent {
   }
 
   adicionarVendas(venda:any){
-    venda.imovel.push(this.selectedImovel) 
+    venda.imovel=[this.selectedImovel]
+    
     venda.cliente = this.selectedCliente
     this.vendasService.addVenda(venda).subscribe(
       (_: any) => {

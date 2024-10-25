@@ -24,7 +24,7 @@
       </div>
     </div>
   </div>
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
     <div *ngFor="let project of filteredProjects; let i = index" class="w-full">
       <div class="relative w-full h-40 rounded-t-lg bg-center bg-slate-200"
         [ngStyle]="{ 'background-image': 'url(' + project.image + ')' }">
@@ -65,7 +65,7 @@
           <p class="flex items-center"><lucide-icon name="HandCoins" size="20" ></lucide-icon> <strong class="ml-1 mr-2">Valor de Parcela:</strong> {{ project.installment  | currency:'AOA':'symbol'}} KZ</p>
           <p class="flex items-center"><lucide-icon name="Coins" size="20"></lucide-icon><strong class="ml-1 mr-2">Parcelas:</strong> {{ calculateParcela(project.finalityValue, project.initialValue, project.installment) }} </p>
           <p class="flex items-center"><lucide-icon name="Clock4" size="20"></lucide-icon> <strong class="ml-2 mr-2">Tempo:</strong> {{ calculateYears(calculateParcela(project.finalityValue, project.initialValue, project.installment)) }} anos e {{ calculateRemainingMonths(calculateParcela(project.finalityValue, project.initialValue, project.installment)) }} meses </p>
-          <p class="flex items-center "><strong class="mr-2">Status:</strong >  Disponivel</p>
+          <p class="flex items-center "><strong class="mr-2">Status:</strong >{{project.iscupado ? 'Ocupado':'Disponivel'}}  </p>
         </div>
       </div>
     </div>
