@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ImoveisService } from '../../../service/imoveis.service';
 import { UsuarioService } from '../../../service/usuario.service';
-import { DomSanitizer, SafeResourceUrl, SafeUrl  } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-vendas-modal',
@@ -11,20 +11,23 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl  } from '@angular/platform-brows
 })
 export class VendasModalComponent {
   @Output() close = new EventEmitter<void>();
-  novoItem: boolean = false;
+  @Output() addVenda = new EventEmitter<any>();
+
   vendas: FormGroup;
   imoveis: any[] = [];
-  clientes: any [] = [];
+  clientes: any[] = [];
   selectedFile: File | null = null;
   filePreview: SafeResourceUrl | null = null;
   errorMessage: string | null = null;
   isImage: boolean = false;
   isPdf: boolean = false;
 
-  constructor(private fb: FormBuilder,
-     private imoveisService: ImoveisService,
-     private usuarioService: UsuarioService,
-     private sanitizer: DomSanitizer) {
+  constructor(
+    private fb: FormBuilder,
+    private imoveisService: ImoveisService,
+    private usuarioService: UsuarioService,
+    private sanitizer: DomSanitizer
+  ) {
     this.vendas = this.fb.group({
       cliente: ['', Validators.required],
       imovel: ['', Validators.required],
@@ -34,13 +37,13 @@ export class VendasModalComponent {
     this.getUsuario();
   }
 
-  getImoveis(){
+  getImoveis() {
     this.imoveisService.getImoveisOcupado().subscribe(
       (data: any) => {
-         this.imoveis = data;
+        this.imoveis = data;
       },
       (error) => {
-        console.error('Erro ao projecto:', error);
+        console.error('Erro ao buscar imóveis:', error);
       }
     );
   }
@@ -66,19 +69,18 @@ export class VendasModalComponent {
       this.selectedFile = file;
       this.errorMessage = null;
 
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.filePreview = this.sanitizer.bypassSecurityTrustResourceUrl(e.target.result);
+      };
+      reader.readAsDataURL(file);
+
       if (file.type.startsWith('image')) {
         this.isImage = true;
         this.isPdf = false;
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.filePreview = e.target.result;
-        };
-        reader.readAsDataURL(file);
       } else if (file.type === 'application/pdf') {
         this.isImage = false;
         this.isPdf = true;
-        // Preview do PDF via <iframe>
-        this.filePreview = this.sanitizer.bypassSecurityTrustResourceUrl(URL.createObjectURL(file));
       }
     } else {
       this.selectedFile = null;
@@ -87,11 +89,33 @@ export class VendasModalComponent {
     }
   }
 
-
   onClose() {
     this.close.emit();
   }
-  onSubmit(){
 
+  onSubmit() {
+    if (this.vendas.valid && this.selectedFile) {
+      const reader = new FileReader();
+
+      reader.onload = () => {
+        const base64File = reader.result as string;
+
+        const venda = {
+          cliente: this.vendas.get('cliente')?.value,
+          imovel: this.vendas.get('imovel')?.value,
+          file: base64File
+        };
+
+       this.addVenda.emit(venda);
+      };
+
+      reader.onerror = () => {
+        this.errorMessage = 'Erro ao processar o arquivo. Tente novamente.';
+      };
+
+      reader.readAsDataURL(this.selectedFile);
+    } else {
+      this.errorMessage = 'Por favor, complete todos os campos e selecione um arquivo.';
+    }
   }
 }

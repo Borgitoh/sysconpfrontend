@@ -18,115 +18,9 @@
   </div>
 
   <div class="container mx-auto py-8">
-    <!-- Título da página -->
-    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Histórico de Vendas</h1>
-
-    <!-- Lista de Vendas -->
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-8">Gestão de Vendas</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-      <!-- Venda 1 -->
-      <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition duration-300 ease-in-out">
-        <div class="flex items-center mb-4">
-          <div class="text-blue-500 bg-blue-100 rounded-full p-3">
-            <i class="fas fa-user"></i>
-          </div>
-          <h2 class="ml-4 text-xl font-semibold">João Silva</h2>
-        </div>
-
-        <!-- Detalhes da venda -->
-        <div class="text-gray-700 mb-4">
-          <p><i class="fas fa-dollar-sign"></i> <strong>Valor Global:</strong> KZ 100.000</p>
-          <p><i class="fas fa-hand-holding-usd"></i> <strong>Valor de Entrada:</strong> KZ 20.000</p>
-          <p><i class="fas fa-calendar-alt"></i> <strong>Parcelas:</strong> 8 (4 pagas)</p>
-          <p><i class="fas fa-clock"></i> <strong>Tempo:</strong> 12 meses</p>
-        </div>
-
-        <!-- Barra de Progresso -->
-        <div class="mb-4">
-          <h3 class="text-lg font-semibold mb-2">Progresso de Pagamento</h3>
-          <div class="relative w-full h-4 bg-gray-200 rounded-full">
-            <div class="absolute top-0 left-0 h-4 bg-green-500 rounded-full" style="width: 50%;"></div>
-          </div>
-          <p class="mt-1 text-sm text-gray-500">4 de 8 parcelas pagas</p>
-        </div>
-
-        <!-- Botão de Ação -->
-        <button class="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
-          <i class="fas fa-info-circle"></i> Ver Detalhes
-        </button>
-      </div>
-
-      <!-- Venda 2 -->
-      <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition duration-300 ease-in-out">
-        <div class="flex items-center mb-4">
-          <div class="text-green-500 bg-green-100 rounded-full p-3">
-            <i class="fas fa-user"></i>
-          </div>
-          <h2 class="ml-4 text-xl font-semibold">Maria Souza</h2>
-        </div>
-
-        <!-- Detalhes da venda -->
-        <div class="text-gray-700 mb-4">
-          <p><i class="fas fa-dollar-sign"></i> <strong>Valor Global:</strong> KZ 75.000</p>
-          <p><i class="fas fa-hand-holding-usd"></i> <strong>Valor de Entrada:</strong> KZ 15.000</p>
-          <p><i class="fas fa-calendar-alt"></i> <strong>Parcelas:</strong> 10 (6 pagas)</p>
-          <p><i class="fas fa-clock"></i> <strong>Tempo:</strong> 10 meses</p>
-        </div>
-
-        <!-- Barra de Progresso -->
-        <div class="mb-4">
-          <h3 class="text-lg font-semibold mb-2">Progresso de Pagamento</h3>
-          <div class="relative w-full h-4 bg-gray-200 rounded-full">
-            <div class="absolute top-0 left-0 h-4 bg-green-500 rounded-full" style="width: 60%;"></div>
-          </div>
-          <p class="mt-1 text-sm text-gray-500">6 de 10 parcelas pagas</p>
-        </div>
-
-        <!-- Botão de Ação -->
-        <button class="w-full bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition duration-300">
-          <i class="fas fa-info-circle"></i> Ver Detalhes
-        </button>
-      </div>
-
-      <!-- Venda 3 -->
-      <div class="bg-white rounded-lg shadow p-6 hover:shadow-lg transition duration-300 ease-in-out">
-        <div class="flex items-center mb-4">
-          <div class="text-purple-500 bg-purple-100 rounded-full p-3">
-            <i class="fas fa-user"></i>
-          </div>
-          <h2 class="ml-4 text-xl font-semibold">Pedro Mendes</h2>
-        </div>
-
-        <!-- Detalhes da venda -->
-        <div class="text-gray-700 mb-4">
-          <p><i class="fas fa-dollar-sign"></i> <strong>Valor Global:</strong> KZ 120.000</p>
-          <p><i class="fas fa-hand-holding-usd"></i> <strong>Valor de Entrada:</strong> KZ 30.000</p>
-          <p><i class="fas fa-calendar-alt"></i> <strong>Parcelas:</strong> 12 (8 pagas)</p>
-          <p><i class="fas fa-clock"></i> <strong>Tempo:</strong> 24 meses</p>
-        </div>
-
-        <!-- Barra de Progresso -->
-        <div class="mb-4">
-          <h3 class="text-lg font-semibold mb-2">Progresso de Pagamento</h3>
-          <div class="relative w-full h-4 bg-gray-200 rounded-full">
-            <div class="absolute top-0 left-0 h-4 bg-green-500 rounded-full" style="width: 66.67%;"></div>
-          </div>
-          <p class="mt-1 text-sm text-gray-500">8 de 12 parcelas pagas</p>
-        </div>
-
-        <!-- Botão de Ação -->
-        <button class="w-full bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600 transition duration-300">
-          <i class="fas fa-info-circle"></i> Ver Detalhes
-        </button>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-    <div *ngFor="let venda of filteredVenda; let i = index" class="w-full">
-      <div class="relative w-full h-40 rounded-t-lg bg-center bg-slate-200"
-        [ngStyle]="{ 'background-image': 'url(' + venda.image + ')' }">
+      <div *ngFor="let venda of filteredVenda; let i = index" class=" relative bg-white rounded-lg shadow p-6 hover:shadow-lg transition duration-300 ease-in-out">
         <div class="absolute top-2 right-2">
           <div class="relative">
             <button
@@ -139,12 +33,22 @@
               <div class="dropdown-label p-2 font-semibold">Ações</div>
               <div class="dropdown-separator"></div>
               <div
-                (click)="onEdit(venda)"
+                (click)="openModalDocumento(venda)"
                 class="flex items-center cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
                 <lucide-icon name="edit" class="mr-2 h-4 w-4"></lucide-icon>
-                Editar
+                Documentos
               </div>
+              <div
+              class="flex items-center cursor-pointer p-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <lucide-icon name="edit" class="mr-2 h-4 w-4"></lucide-icon>
+              Regularizar Parcelas
+            </div>
+            <button (click)="goConta(venda.cliente[0])" class="w-full px-3 py-2 text-sm flex items-center hover:bg-gray-200">
+              <lucide-icon name="hand-coins" class="mr-2 h-4 w-4"></lucide-icon>
+              Conta Corrente
+            </button>
               <div
                 (click)="onDelete()"
                 class="flex hover:bg-red-100 items-center text-red-600 cursor-pointer p-2"
@@ -155,13 +59,30 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="bg-white dark:bg-dark-primary dark:shadow-lg shadow-sm w-full rounded-lg p-6 text-center relative">
-        <h2 class="mt-1 text-sm font-semibold text-gray-800 dark:text-white">{{ venda.name }}</h2>
-        <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">{{ venda.description }}</p>
+        <div class=" flex items-center mb-4">
+          <div class="text-blue-500 bg-blue-100 rounded-full p-3">
+            <lucide-icon name="user" size="30" class=" h-8 w-8"></lucide-icon>
+          </div>
+          <h2 class="ml-4 text-xl font-semibold">{{venda.cliente[0].name}}</h2>
+        </div>
+
+        <div class="text-gray-700 mb-4">
+          <p><i class="fas fa-dollar-sign"></i> <strong>Valor Global:</strong>{{venda.imovel.finalityValue | currency:'AOA':'symbol'}} KZ</p>
+          <p><i class="fas fa-hand-holding-usd"></i> <strong>Valor de Entrada:</strong> {{venda.imovel.initialValue | currency:'AOA':'symbol'}} KZ</p>
+          <p><i class="fas fa-calendar-alt"></i> <strong>Parcelas:</strong> {{calculateParcela(venda.imovel.finalityValue, venda.imovel.initialValue, venda.imovel.installment)}}</p>
+          <p><i class="fas fa-clock"></i> <strong>Tempo:</strong> {{ calculateYears(calculateParcela(venda.imovel.finalityValue, venda.imovel.initialValue, venda.imovel.installment)) }} anos e {{ calculateRemainingMonths(calculateParcela(venda.imovel.finalityValue, venda.imovel.initialValue, venda.imovel.installment)) }} meses</p>
+        </div>
+        <div class="mb-4">
+          <h3 class="text-lg font-semibold mb-2">Progresso de Pagamento</h3>
+          <div class="relative w-full h-4 bg-gray-200 rounded-full">
+            <div class="absolute top-0 left-0 h-4 bg-green-500 rounded-full" [style.width]="venda.pacelas ? '50%' : '0%'"></div>
+          </div>
+          <p class="mt-1 text-sm text-gray-500"> {{venda.pacelas ? '4 de 8 parcelas pagas':'Não foi efetuado pagamento de parcelas'}}</p>
+        </div>
       </div>
     </div>
   </div>
 
   <app-vendas-modal *ngIf="isCreateModalOpen" (close)="closeCreateModal()" (addVenda)="addVenda($event)" [selectedVenda]="selectedVenda"></app-vendas-modal>
+  <app-documentos-modal *ngIf="isModalDocumento" [selectedVenda]="selectedVenda" (close)="closeModalDocumento()"></app-documentos-modal>
 </section>

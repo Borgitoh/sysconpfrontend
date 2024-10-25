@@ -13,6 +13,9 @@ export class ImoveisService {
   getImoveis(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}`);
   }
+  getImoveisId(id:any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${id}`);
+  }
 
   getImoveisOcupado(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}?iscupado=false`);
@@ -22,5 +25,9 @@ export class ImoveisService {
     imovel.iscupado = false;
     imovel.flDelete = false;
     return this.http.post<any[]>(`${this.apiUrl}`, imovel);
+  }
+
+  statusImovel(imovel:any, id:any): Observable<any[]> {
+    return this.http.put<any[]>(`${this.apiUrl}/${id}`, imovel);
   }
 }

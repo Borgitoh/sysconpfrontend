@@ -17,7 +17,7 @@
           <div>
             <label class="dark:text-white mb-1">Selecione o Cliente</label>
             <select formControlName="cliente" required class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
-              <option *ngFor="let cliente of clientes" value="{{cliente.id}}">{{cliente.name}}</option>
+              <option *ngFor="let cliente of clientes" value="{{cliente.uuid}}">{{cliente.name}}</option>
             </select>
           </div>
           <div>

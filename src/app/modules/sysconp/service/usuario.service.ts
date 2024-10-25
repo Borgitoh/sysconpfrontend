@@ -26,6 +26,10 @@ export class UsuarioService {
     return this.http.post<any>(`${this.apiUrl2}`, usuario);
   }
 
+  getClienteId(id: any): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl2}?uuid=${id}`);
+  }
+
 
   editUsuario(usuario: any, id:any): Observable<any> {
 

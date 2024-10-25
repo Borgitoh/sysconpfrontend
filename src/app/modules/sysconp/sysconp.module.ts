@@ -5,7 +5,7 @@ import { SysconpRoutingModule } from './sysconp-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { Briefcase, CalendarDays, Check, CheckCheck, CircleSlash, Clock3, Clock4, Coins, DollarSign, Download, Edit, Ellipsis, Eye, EyeOff, File, FileIcon, FileText, HandCoins, Home, Lock, LucideAngularModule, Menu, Pencil, Plus, Settings, ShoppingCart, Trash2, UserCheck, UserRoundCog, Users } from 'lucide-angular';
+import { Briefcase, CalendarDays, Check, CheckCheck, CircleSlash, Clock3, Clock4, Coins, DollarSign, Download, Edit, Ellipsis, Eye, EyeOff, File, FileIcon, FileText, HandCoins, Home, Lock, LucideAngularModule, Menu, Pencil, Plus, Settings, ShoppingCart, Trash2, User, UserCheck, UserRoundCog, Users } from 'lucide-angular';
 import { AgendamentoComponent } from './components/agendamento/agendamento.component';
 import { AgendamentoModalComponent } from './components/modal/agendamento-modal/agendamento-modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,10 +29,14 @@ import { TipoImoveisModalComponent } from './components/modal/tipo-imoveis-modal
 import { VendasComponent } from './components/vendas/vendas.component';
 import { VendasModalComponent } from './components/modal/vendas-modal/vendas-modal.component';
 import { SafeUrlPipe } from './pipe/safe-url.pipe';
+import { DocumentosModalComponent } from './components/modal/documentos-modal/documentos-modal.component';
+import { ParcelasComponent } from './components/parcelas/parcelas.component';
+import { ParcelasModalComponent } from './components/modal/parcelas-modal/parcelas-modal.component';
 
 registerLocaleData(localePt);
 const icon: any =
   {
+    User,
     Clock4,
     DollarSign,
     HandCoins,
@@ -83,7 +87,11 @@ const icon: any =
     TipoImoveisModalComponent,
     VendasComponent,
     VendasModalComponent,
-    SafeUrlPipe
+    SafeUrlPipe,
+    DocumentosModalComponent,
+    ParcelasComponent,
+    ParcelasModalComponent,
+
   ],
   imports: [
     CommonModule,

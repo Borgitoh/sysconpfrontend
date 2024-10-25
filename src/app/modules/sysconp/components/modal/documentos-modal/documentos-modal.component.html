@@ -1,0 +1,42 @@
+<div class="fixed inset-0 flex items-center justify-center z-50">
+  <div class="bg-black opacity-50 absolute inset-0"></div>
+  <div class="bg-white dark:bg-dark-primary rounded-lg w-[80%] max-w-3xl h-auto z-10 overflow-y-auto">
+    <div class="flex justify-between items-center GD-SP mb-4 bg-fundo p-3 rounded-t-lg">
+      <div class="text-xl font-bold text-white">Documentos</div>
+      <button (click)="onClose()" class="text-white">X</button>
+    </div>
+    <div class="max-w-4xl mx-auto bg-white p-8 shadow rounded-lg">
+      <h1 class="text-3xl font-bold mb-6">Lista de Documentos</h1>
+      
+      <ul class="space-y-4">
+          <li class="flex justify-between items-center p-4 bg-gray-50 rounded-lg shadow">
+              <span class="text-lg font-semibold">Valor de Entrada</span>
+              <div>
+                  <button (click)="getFatura()" class="border border-blue-500 text-blue-500 px-3 py-1 rounded hover:bg-blue-500 hover:text-white mr-2">
+                      <svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 15l-4-4h3V9h2v2h3l-4 4z"></path></svg>
+                      Baixar
+                  </button>
+                  <button  class="border border-blue-500 text-blue-500 px-3 py-1 rounded hover:bg-fundo hover:text-white mr-2">
+                      <svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 17l5-5H9V6H6v6H3l7 7z"></path></svg>
+                      Ver
+                  </button>
+              </div>
+          </li>
+          <li class="flex justify-between items-center p-4 bg-gray-50 rounded-lg shadow">
+              <span class="text-lg font-semibold">Documento 2</span>
+              <div>
+                  <button class="border border-blue-500 text-blue-500 px-3 py-1 rounded hover:bg-blue-500 hover:text-white mr-2">
+                      <svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 15l-4-4h3V9h2v2h3l-4 4z"></path></svg>
+                      Baixar
+                  </button>
+                  <button class="border border-blue-500 text-blue-500 px-3 py-1 rounded hover:bg-blue-500 hover:text-white mr-2">
+                      <svg class="inline w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M10 17l5-5H9V6H6v6H3l7 7z"></path></svg>
+                      Ver
+                  </button>
+              </div>
+          </li>
+      </ul>
+  </div>
+  </div>
+</div>
+<div *ngIf="faturaHtml" class="w-full" [innerHTML]="faturaHtml" class="mt-4"></div>
