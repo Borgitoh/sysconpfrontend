@@ -14,6 +14,10 @@ export class ImoveisService {
     return this.http.get<any[]>(`${this.apiUrl}`);
   }
 
+  getImoveisOcupado(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}?iscupado=false`);
+  }
+
   addImovel(imovel: any): Observable<any[]> {
     imovel.iscupado = true;
     imovel.flDelete = false;

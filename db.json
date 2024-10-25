@@ -34,7 +34,7 @@
       "initialValue": 5000000,
       "installment": 300000,
       "finalityValue": 15000000,
-      "iscupado": true,
+      "iscupado": false,
       "flDelete": true
     },
     {
@@ -46,7 +46,7 @@
       "initialValue": 5000000,
       "installment": 300000,
       "finalityValue": 15000000,
-      "iscupado": true,
+      "iscupado": false,
       "flDelete": true
     },
     {
@@ -58,7 +58,7 @@
       "initialValue": 1000000,
       "installment": 200000,
       "finalityValue": 15000000,
-      "iscupado": true,
+      "iscupado": false,
       "flDelete": false
     },
     {
@@ -70,7 +70,7 @@
       "initialValue": 3000000,
       "installment": 250000,
       "finalityValue": 10000000,
-      "iscupado": true,
+      "iscupado": false,
       "flDelete": false
     }
   ],

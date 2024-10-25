@@ -35,7 +35,7 @@ export class VendasModalComponent {
   }
 
   getImoveis(){
-    this.imoveisService.getImoveis().subscribe(
+    this.imoveisService.getImoveisOcupado().subscribe(
       (data: any) => {
          this.imoveis = data;
       },

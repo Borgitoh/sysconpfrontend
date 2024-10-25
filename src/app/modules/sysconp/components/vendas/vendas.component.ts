@@ -23,7 +23,6 @@ export class VendasComponent {
   }
 
   ngOnInit() {
-    this.getProjetos();
   }
 
   openCreateModal() {
@@ -34,7 +33,6 @@ export class VendasComponent {
     if(this.selectedVenda){
       this.vendasService.addVenda(venda).subscribe(
         (_: any) => {
-          this.getProjetos()
             this.closeCreateModal();
         },
         (error) => {
@@ -44,7 +42,6 @@ export class VendasComponent {
     }else{
       this.vendasService.editStatusVenda(venda, venda.id).subscribe(
         (_: any) => {
-          this.getProjetos();
             this.closeCreateModal();
         },
         (error) => {
