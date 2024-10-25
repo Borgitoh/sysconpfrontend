@@ -19,7 +19,7 @@ export class ImoveisService {
   }
 
   addImovel(imovel: any): Observable<any[]> {
-    imovel.iscupado = true;
+    imovel.iscupado = false;
     imovel.flDelete = false;
     return this.http.post<any[]>(`${this.apiUrl}`, imovel);
   }
