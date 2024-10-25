@@ -9,6 +9,7 @@ import { ModulosComponent } from './components/modulos/modulos.component';
 import { ContaCorrenteComponent } from './components/conta-corrente/conta-corrente.component';
 import { ImoveisComponent } from './components/imoveis/imoveis.component';
 import { VendasComponent } from './components/vendas/vendas.component';
+import { ParcelasComponent } from './components/parcelas/parcelas.component';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
       { path: 'modulos', component: ModulosComponent },
       { path: 'conta/:id', component: ContaCorrenteComponent },
       { path: 'imovel', component: ImoveisComponent },
-      { path: 'vendas', component: VendasComponent, title:'Gestão de Vendas' }
+      { path: 'vendas', component: VendasComponent, title:'Gestão de Vendas' },
+      { path: 'parcelas/:id', component: ParcelasComponent,  }
     ]
   }
 ];

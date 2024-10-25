@@ -1,1 +1,80 @@
-<p>parcelas-modal works!</p>
+<div class="fixed inset-0 flex items-center justify-center z-50">
+  <div class="bg-black opacity-50 absolute inset-0"></div>
+  <div class="bg-white dark:bg-dark-primary rounded-lg w-[80%] max-w-3xl h-[90%] z-10 overflow-y-auto">
+    <div class="flex justify-between items-center GD-SP mb-4 bg-fundo p-3 rounded-t-lg">
+      <div class="text-xl font-bold text-white">Adicionar Parcelas</div>
+      <button (click)="onClose()" class="text-white">X</button>
+    </div>
+    <div class="container mx-auto mb-2">
+      <div class="flex justify-end items-center mb-4">
+        <button  [disabled]="isDisabledButton"
+        (click)="addParcela()"
+          class="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2 dark:hover:bg-dark-primary"
+        >
+          <lucide-icon name="plus" class="w-5 h-5"></lucide-icon>
+          Adicionar Parcela
+          </button>
+      </div>
+    </div>
+    
+    <div class="w-full px-6">
+      <form [formGroup]="parcelas" (ngSubmit)="onSubmit()" class="p-4 space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="dark:text-white mb-1">Selecione o Imóvel</label>
+            <select  formControlName="imovel" required class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+              <option *ngFor="let imovel of imoveis" value="{{imovel.id}}">{{imovel.name}}</option>
+            </select>
+          </div>
+          <div>
+            <label class="dark:text-white mb-1">Valor a pagar</label>
+            <input type="text" formControlName="valor" required [disabled]="isDisabled" mask="separator.2" prefix="AOA " thousandSeparator="." decimalMarker=","
+                   class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+          </div>
+
+          <div>
+            <label class="dark:text-white mb-1">Total</label>
+            <input type="text" formControlName="total" [disabled]="isDisabled" mask="separator.2" prefix="AOA " thousandSeparator="." decimalMarker=","
+                   class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+          </div>
+          <div>
+            <label class="dark:text-white mb-1">Arquivo</label>
+            <input type="file" formControlName="file" (change)="onFileSelected($event)" accept=".pdf, .png, .jpeg, .jpg"
+                   class="mt-1 block w-full h-9 border border-input bg-transparent rounded-md shadow-sm px-3 py-1 text-sm">
+            <div *ngIf="errorMessage" class="text-red-500 mt-2">{{ errorMessage }}</div>
+            <div *ngIf="filePreview" class="mt-4">
+              <img *ngIf="isImage" [src]="filePreview" class="h-32 w-32 object-cover rounded-md" />
+              <div *ngIf="!isImage && isPdf" class="w-full h-48">
+                <iframe [src]="filePreview" width="100%" height="100%"></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-4">
+          <button type="submit"  class="bg-blue-500 w-full text-white p-2 rounded">Finalizar</button>
+        </div>
+      </form>
+    </div>
+    
+    <div class="w-full px-6 mt-6">
+      <table class="min-w-full bg-white dark:bg-dark-secondary rounded-md shadow">
+        <thead class="bg-gray-200 dark:bg-gray-700">
+          <tr>
+            <th class="py-3 px-6 text-left">Imóvel</th>
+            <th class="py-3 px-6 text-left">Valor</th>
+            <th class="py-3 px-6 text-center">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let parcela of parcelasAdicionadas" class="border-b dark:border-gray-700">
+            <td class="py-3 px-6">{{ parcela.imovelName }}</td>
+            <td class="py-3 px-6">{{ parcela.valor | currency:'BRL' }}</td>
+            <td class="py-3 px-6 text-center">
+              <button (click)="removerParcela(parcela)" class="bg-red-500 text-white px-4 py-1 rounded">Remover</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

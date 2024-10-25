@@ -19,6 +19,7 @@ export class VendasComponent {
   selectedVenda: any = null;
   selectedImovel: any = null;
   selectedCliente:  any = null;
+  totalParcela:number = 0
 
   constructor(private vendasService: VendasService,
               private imoveisService: ImoveisService,
@@ -49,13 +50,11 @@ export class VendasComponent {
   }
 
   addVenda(venda:any){
-    console.log(venda);
-
-  this.getImovel(venda)
+   this.getImovel(venda)
   }
 
   adicionarVendas(venda:any){
-    venda.imovel = this.selectedImovel
+    venda.imovel.push(this.selectedImovel) 
     venda.cliente = this.selectedCliente
     this.vendasService.addVenda(venda).subscribe(
       (_: any) => {
@@ -110,6 +109,9 @@ export class VendasComponent {
     this.vendasService.getVendas().subscribe(
       (data: any) => {
         this.filteredVenda= data;
+        console.log(data);
+        
+        this.totalParcela = data[0].parcela[0].parcelas.length 
       },
       (error) => {
         console.error('Erro ao projecto:', error);
@@ -132,6 +134,10 @@ export class VendasComponent {
 
   goConta(user:any){
     this.router.navigate(['sysconp/conta/'+user.uuid]);
+  }
+
+  gopParcela(venda:any){
+    this.router.navigate(['sysconp/parcelas/'+venda.id]);
   }
 
   closeCreateModal() {

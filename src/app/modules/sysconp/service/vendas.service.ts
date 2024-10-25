@@ -14,10 +14,19 @@ export class VendasService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
+  getVendaId(id:any): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/${id}`);
+  }
+
   addVenda(venda: any): Observable<any> {
 
     return this.http.post<any>(`${this.apiUrl}`, venda);
   }
+
+  editVenda(venda:any,id:any){
+    return this.http.put<any>(`${this.apiUrl}/${id}`, venda);
+  }
+  
   getDocumentoBy(name:any): Observable<any[]> {
     return this.http.get<any[]>(`http://localhost:8000/documentos?type=${name}`);
   }

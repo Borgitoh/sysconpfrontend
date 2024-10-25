@@ -1,1 +1,87 @@
-<p>parcelas works!</p>
+<div class="container mx-auto mt-10 p-4">
+
+  <div class="container mx-auto mb-4">
+    <div class="flex justify-between items-center mb-4">
+      <input
+        type="text"
+        [formControl]="searchControl"
+        placeholder="Pesquisar Vendas..."
+        class="border rounded-full p-2 pl-4 w-1/2 bg-white dark:text-white dark:bg-dark-primary dark:border-none dark:focus:border-none dark:shadow-sm focus:!ring-1 ring-offset-1 !ring-blue-800"
+      />
+      <button
+        (click)="openCreateModal()"
+        class="bg-blue-500 text-white rounded-full px-4 py-2 flex items-center gap-2 dark:hover:bg-dark-primary"
+      >
+        <lucide-icon name="plus" class="w-5 h-5"></lucide-icon>
+         Adicionar Venda
+        </button>
+    </div>
+  </div>
+  <!-- Resumo das parcelas -->
+  <div class="bg-white rounded-lg shadow-lg p-6 flex justify-between items-center mb-8">
+    <div class="text-center">
+      <p class="text-gray-500 text-lg">Parcelas Pagas</p>
+      <p class="text-4xl font-bold text-blue-600">{{parcelas.length}}</p>
+    </div>
+    <div class="text-center">
+      <p class="text-gray-500 text-lg">Valor Total Pago</p>
+      <p class="text-4xl font-bold text-green-600">{{totalValor | currency:'AOA':'symbol'}} KZ</p>
+    </div>
+    <div class="text-center">
+      <p class="text-gray-500 text-lg">Último Pagamento</p>
+      <p class="text-2xl font-semibold text-gray-800">{{parcelas[parcelas.length -1].data}}</p>
+    </div>
+    <div class="text-center">
+      <p class="text-gray-500 text-lg">Progresso</p>
+      <div class="relative w-24 h-24 mx-auto">
+          <svg class="absolute top-0 left-0 w-full h-full" viewBox="0 0 36 36">
+            <!-- Círculo de fundo cinza -->
+            <path class="text-gray-300" d="M18 2.0845a15.9155 15.9155 0 1 1 0 31.831 15.9155 15.9155 0 1 1 0-31.831" fill="none" stroke-width="2" stroke="currentColor" />
+            
+            <!-- Círculo de progresso verde completo -->
+            <path class="text-green-500" d="M18 2.0845a15.9155 15.9155 0 1 1 0 31.831 15.9155 15.9155 0 1 1 0-31.831" fill="none" stroke-width="2" stroke-dasharray="100" stroke-dashoffset="100" stroke="currentColor" />
+          </svg>
+          
+          <!-- Texto central com a porcentagem -->
+          <p class="absolute inset-0 flex items-center justify-center text-xl font-bold text-green-600">100%</p>
+        </div>
+        
+    </div>
+  </div>
+
+  <!-- Tabela de parcelas pagas -->
+  <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+    <table class="min-w-full leading-normal">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="px-5 py-3 border-b border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Descrição</th>
+          <th class="px-5 py-3 border-b border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Data de Pagamento</th>
+          <th class="px-5 py-3 border-b border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Valor Pago</th>
+          <th class="px-5 py-3 border-b border-gray-200 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let parcela of parcelas">
+          <td class="px-5 py-5 border-b border-gray-200 text-sm">{{parcela.imovelName}}</td>
+          <td class="px-5 py-5 border-b border-gray-200 text-sm">{{parcela.data}}</td>
+          <td class="px-5 py-5 border-b border-gray-200 text-sm">{{parcela.valor | currency:'AOA':'symbol'}} KZ</td>
+          <td class="px-5 py-5 border-b border-gray-200 text-sm text-green-600 font-semibold">{{parcela.status}}</td>
+        </tr>
+       
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginação -->
+  <div class="mt-4 flex justify-between items-center">
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Anterior
+    </button>
+    <p>Página 1 de 5</p>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+      Próxima
+    </button>
+  </div>
+  
+  <app-parcelas-modal *ngIf="isCreateModalOpen" (close)="closeCreateModal()" (addVenda)="addVenda($event)"></app-parcelas-modal>
+</div>
