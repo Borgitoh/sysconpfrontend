@@ -22,13 +22,13 @@ export class DocumentosModalComponent {
         const dado =data[0].body;
         this.faturaHtml= true
         this.contHtml = this.substituirVariavel(dado,'[DATA_HOJE]',this.obterDataHoje())
-        this.contHtml = this.substituirVariavel(this.contHtml,'[VALOR_PAGO]',this.selectedVenda.imovel.initialValue)
-        this.contHtml = this.substituirVariavel(this.contHtml,'[NUMERO_DE_PRESTACAO]',  this.calculateParcela(this.selectedVenda.imovel.finalityValue, this.selectedVenda.imovel.initialValue, this.selectedVenda.imovel.installment))
-        this.contHtml = this.substituirVariavel(this.contHtml,'[NOME_DO_IMOVEL]', this.selectedVenda.imovel.name)
+        this.contHtml = this.substituirVariavel(this.contHtml,'[VALOR_PAGO]',this.selectedVenda.imovel[0].initialValue)
+        this.contHtml = this.substituirVariavel(this.contHtml,'[NUMERO_DE_PRESTACAO]',  this.calculateParcela(this.selectedVenda.imovel[0].finalityValue, this.selectedVenda.imovel[0].initialValue, this.selectedVenda.imovel[0].installment))
+        this.contHtml = this.substituirVariavel(this.contHtml,'[NOME_DO_IMOVEL]', this.selectedVenda.imovel[0].name)
         this.contHtml = this.substituirVariavel(this.contHtml,'[NOME_CLIENTE]', this.selectedVenda.cliente[0].name)
         this.contHtml = this.substituirVariavel(this.contHtml,'[ENDERECO_CLIENTE]',this.selectedVenda.cliente[0].provincia.split(';')[1]+','+this.selectedVenda.cliente[0].municipio.split(';')[1]+','+this.selectedVenda.cliente[0].distrito.split(';')[1]+','+ this.selectedVenda.cliente[0].bairro.split(';')[1])
         this.contHtml = this.substituirVariavel(this.contHtml,'[NUMERO_DO_CLIENTE]',this.selectedVenda.cliente[0].phone)
-        this.contHtml = this.substituirVariavel(this.contHtml,'[VALOR_GOLBAL]',this.selectedVenda.imovel.finalityValue)
+        this.contHtml = this.substituirVariavel(this.contHtml,'[VALOR_GLOBAL]',this.selectedVenda.imovel[0].finalityValue);
       },
       (error) => {
         console.error('Erro ao projecto:', error);
